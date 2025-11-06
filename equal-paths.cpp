@@ -12,7 +12,13 @@ using namespace std;
 
 bool equalPaths(Node * root)
 {
-    // Add your code below
+    return (depth(root->left) == depth(root->right));
 
 }
 
+int depth(Node * root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    return max(depth(root->left), depth(root->right)) + 1;
+}
