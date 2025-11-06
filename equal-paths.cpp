@@ -20,5 +20,5 @@ int depth(Node * root) {
     if (root == nullptr) {
         return 0;
     }
-    return max(depth(root->left), depth(root->right)) + 1;
+    return std::max(depth(root->left), depth(root->right)) + 1;
 }
