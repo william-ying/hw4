@@ -210,9 +210,11 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 
             
             if (right1 > left1) {
+                cout << "bend" << endl;
                 AVLNode<Key, Value>* currt2 = currt -> getRight();
                 if (currt->getLeft() != NULL) {
                     nodeSwap(currt2, currt->getLeft());
+                    currt2 = currt->getLeft();
                     nodeSwap(currt2->getLeft(), currt->getRight());
                     nodeSwap(currt2->getRight(), currt->getRight());
                 } else {
@@ -246,6 +248,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             else right1 = currt->getRight()->getBalance();
 
             if (right1 < left1) {
+                cout << "bend" << endl;
             //     AVLNode<Key, Value>* currt2 = currt -> getLeft();
             //     nodeSwap(currt2, currt->getRight());
             //     nodeSwap(currt2->getRight(), currt->getLeft());
@@ -259,6 +262,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 AVLNode<Key, Value>* currt2 = currt -> getLeft();
                 if (currt->getRight() != NULL) {
                     nodeSwap(currt2, currt->getRight());
+                    currt2 = currt->getRight();
                     nodeSwap(currt2->getRight(), currt->getLeft());
                     nodeSwap(currt2->getLeft(), currt->getLeft());
                 } else {
