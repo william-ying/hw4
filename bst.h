@@ -536,12 +536,16 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             curr = curr->getRight();
             left = false;
         } else {
-            if (left) {
+            if (curr->getParent() == NULL) {
+                delete curr;
+                root_ = NULL;
+            } else if (left) {
                 curr->getParent()->setLeft(NULL);
             } else {
                 curr->getParent()->setRight(NULL);
             }
             delete curr;
+            break;
         }
     }
 }
