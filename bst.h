@@ -405,7 +405,8 @@ BinarySearchTree<Key, Value>::iterator::operator++()
             return begin;
         }
     }
-    BinarySearchTree<Key, Value>::iterator begin(current_->getRight());
+    current_ = current_->getRight();
+    BinarySearchTree<Key, Value>::iterator begin(current_);
     return begin;
 }
 
