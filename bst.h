@@ -709,7 +709,7 @@ template<typename Key, typename Value>
 bool BinarySearchTree<Key, Value>::isBalanced() const
 {
     cout << "balancer" << endl;
-    if (root_ = NULL) return true;
+    if (root_ == NULL) return true;
     return (subbalance(root_) != -1);
 }
 
