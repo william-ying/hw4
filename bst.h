@@ -312,8 +312,8 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->current_->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs->current_->getSmallestNode();
+    Node<Key, Value>* temp1 = this->getSmallestNode(current_);
+    Node<Key, Value>* temp2 = rhs->getSmallestNode(current_);
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() == temp2->getValue()) {
@@ -351,8 +351,8 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->current_->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs->current_->getSmallestNode();
+    Node<Key, Value>* temp1 = this->getSmallestNode(current_);
+    Node<Key, Value>* temp2 = rhs->getSmallestNode(current_);
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() != temp2->getValue()) {
