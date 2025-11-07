@@ -135,7 +135,6 @@ public:
     virtual void remove(const Key& key);  // TODO
 protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
-    AVLNode<Key, Value>* root() {return super(root_);}
 
     // Add helper functions here
 
@@ -178,7 +177,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         back->setLeft(new AVLNode<Key, Value>(new_item.first, new_item.second, back));
         curr = back->getLeft();
     } else {
-        back->setRight(new AVLNode<Key, Value>(keyValuePair.first, keyValuePair.second, back));
+        back->setRight(new AVLNode<Key, Value>(new_item.first, new_item.second, back));
         curr = back->getRight();
     }
 
@@ -247,7 +246,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
-    AVLNode<Key, Value> *curr = root_;
+    AVLNode<Key, Value> *curr = this.root_;
     AVLNode<Key, Value> *par = NULL;
     if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
@@ -288,7 +287,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
 
     curr = par;
     while (curr != NULL) {
-        AVLNode<Key, Value>* currt
+        AVLNode<Key, Value>* currt;
         int left, right, left1, right1;
         if (curr->getLeft() == NULL) left = 0;
         else left = curr->getLeft()->getBalance();
