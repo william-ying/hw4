@@ -177,7 +177,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     }
     if (this->root_ == NULL) {
         this->root_ = new AVLNode<Key, Value>(new_item.first, new_item.second, NULL);
-        this->root_->setBalance(0);
         return;
     }
     if (back == NULL) {}
