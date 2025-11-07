@@ -466,7 +466,24 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::remove(const Key& key)
 {
-    // TODO
+    Node<Key, Value> *curr = internalFind(key);
+    while (curr != NULL) {
+        if (curr->getLeft() != NULL) {
+            nodeswap(curr, curr->getLeft());
+            curr = curr->getLeft();
+        } else if (curr->getRight() != NULL {
+            nodeswap(curr, curr->getRight());
+            curr = curr->getRight();
+        } else {
+            if (curr->getParent() == NULL) {}
+            else if (curr = curr->getParent()->getLeft()) {
+                curr->getParent()->setLeft(NULL);
+            } else {
+                curr->getParent()->setRight(NULL);
+            }
+            delete curr;
+            break;
+        }
 }
 
 
