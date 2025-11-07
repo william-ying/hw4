@@ -589,10 +589,15 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             } else {
                 cout << "l" << endl;
                 Node<Key, Value> *max = curr->getLeft();
-                while (max->getRight() != NULL) max = max->getRight();
+                left = true;
+                while (max->getRight() != NULL) {
+                    max = max->getRight();
+                    left = false;
+                }
                 nodeSwap(max, curr);
                 if (curr->getLeft() == NULL) {
-                    curr->getParent()->setRight(NULL);
+                    if (left) curr->getParent()->setLeft(NULL);
+                    else curr->getParent()->setRight(NULL);
                     delete curr;
                 } else {
                     curr->getParent()->setRight(curr->getLeft());
