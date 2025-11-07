@@ -201,6 +201,7 @@ public:
     bool isBalanced() const; //TODO
     void print() const;
     bool empty() const;
+    int subbalance(Node* root) const;
 
     template<typename PPKey, typename PPValue>
     friend void prettyPrintBST(BinarySearchTree<PPKey, PPValue> & tree);
@@ -610,9 +611,34 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
 template<typename Key, typename Value>
 bool BinarySearchTree<Key, Value>::isBalanced() const
 {
-    // TODO
+    return (subbalance(root_) != -1);
 }
 
+template<typename Key, typename Value>
+int BinarySearchTree<Key, Value>::subbalance(Node* root) const {
+    if (root->getLeft() == NULL) {
+        if (root->getRight() == NULL) {
+            return 1;
+        } else if (subbalance(root->getRight()) >= 1 || subbalance(root->getRight()) == -1) {
+            return -1;
+        } else {
+            return 2;
+        }
+    } else if (root->getRight() == NULL) {
+        if (subbalance(root->getLeft()) >= 1 || subbalance(root->getLeft()) == -1) {
+            return -1;
+        } else {
+            return 2;
+        }
+    } else {
+        if (subbalance(root->getRight()) == -1 || subbalance(root->getLeft()) == -1 || 
+                abs(subbalance(root->getRight()) - subbalance(root->getLeft())) > 1) {
+            return -1;
+        } else {
+            return max(subbalance(root->getRight()), subbalance(root->getLeft())) + 1;
+        }
+    }
+}
 
 
 template<typename Key, typename Value>
