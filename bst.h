@@ -201,7 +201,7 @@ public:
     bool isBalanced() const; //TODO
     void print() const;
     bool empty() const;
-    int subbalance(Node* root) const;
+    int subbalance(Node<Key, Value>* root) const;
 
     template<typename PPKey, typename PPValue>
     friend void prettyPrintBST(BinarySearchTree<PPKey, PPValue> & tree);
@@ -309,10 +309,10 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node* temp1 = this.current_->getSmallestNode();
-    Node* temp2 = rhs.current_->getSmallestNode();
-    stack<Node*> rlog;
-    stack<Node*> rhslog;
+    Node<Key, Value>* temp1 = this.current_->getSmallestNode();
+    Node<Key, Value>* temp2 = rhs.current_->getSmallestNode();
+    stack<Node<Key, Value>*> rlog;
+    stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() == temp2->getValue()) {
         if (temp1->getLeft() != NULL) {
             if (temp2 -> getLeft() == NULL) return false;
@@ -348,10 +348,10 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node* temp1 = this.current_->getSmallestNode();
-    Node* temp2 = rhs.current_->getSmallestNode();
-    stack<Node*> rlog;
-    stack<Node*> rhslog;
+    Node<Key, Value>* temp1 = this.current_->getSmallestNode();
+    Node<Key, Value>* temp2 = rhs.current_->getSmallestNode();
+    stack<Node<Key, Value>*> rlog;
+    stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() != temp2->getValue()) {
         if (temp1->getLeft() != NULL) {
             if (temp2 -> getLeft() == NULL) return false;
@@ -388,7 +388,7 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     while (current_->getRight() == NULL) {
-        Node* temp = current_;
+        Node<Key, Value>* temp = current_;
         current_ = current_->getParent();
         if (current_->getLeft() == temp) {
             BinarySearchTree<Key, Value>::iterator begin(current_);
@@ -594,7 +594,7 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
-    Node* temp = root_;
+    Node<Key, Value>* temp = root_;
     bool left;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
@@ -609,7 +609,7 @@ void BinarySearchTree<Key, Value>::clear()
                 left = true;
             }
         }
-        Node* temp1 = temp->getParent();
+        Node<Key, Value>* temp1 = temp->getParent();
         delete temp;
         if (temp1 == NULL) {
             break;
@@ -631,7 +631,7 @@ template<typename Key, typename Value>
 Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
-    Node* temp = root_;
+    Node<Key, Value>* temp = root_;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
             temp = temp->getLeft();
@@ -654,7 +654,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
-    Node* curr = root_;
+    Node<Key, Value>* curr = root_;
     while (curr != NULL) {
         if (curr->getKey() > key) {
             curr = curr->getRight();
@@ -677,7 +677,7 @@ bool BinarySearchTree<Key, Value>::isBalanced() const
 }
 
 template<typename Key, typename Value>
-int BinarySearchTree<Key, Value>::subbalance(Node* root) const {
+int BinarySearchTree<Key, Value>::subbalance(Node<Key, Value>* root) const {
     if (root->getLeft() == NULL) {
         if (root->getRight() == NULL) {
             return 1;
