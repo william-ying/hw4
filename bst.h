@@ -354,12 +354,12 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         prev = current_;
         current_ = current_->getParent();
         if (current_->getLeft() != NULL && current_->getLeft() == prev) {
-            cout << current_->getKey() << " l " << current_->getValue() << endl;
+            // cout << current_->getKey() << " l " << current_->getValue() << endl;
             return *this;
         }
     }
     current_ = current_->getRight();
-    cout << current_->getKey() << " r " << current_->getValue() << endl;
+    // cout << current_->getKey() << " r " << current_->getValue() << endl;
     return *this;
 }
 
@@ -622,8 +622,10 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
     if (curr == NULL) cout << "null" << endl;
     while (curr != NULL) {
         if (curr->getKey() > key) {
+            cout << "right" << endl;
             curr = curr->getRight();
         } else if (curr->getKey() < key) {
+            cout << "left" << endl;
             curr = curr->getLeft();
         } else {
             return curr;
