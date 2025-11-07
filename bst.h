@@ -506,7 +506,7 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::remove(const Key& key)
 {
-    cout << "rem " << key << endl;
+    // cout << "rem " << key << endl;
     Node<Key, Value> *curr = root_;
     if (root_ == NULL) return;
 
@@ -528,7 +528,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
     if (curr != NULL) {
         if (curr->getLeft() == NULL) {
-            cout << "right" << endl;
+            // cout << "right" << endl;
             if (curr->getRight() == NULL) {
                 if (left) {
                     if (prev != NULL) prev->setLeft(NULL);
@@ -564,7 +564,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             }
         } else {
             if (curr->getRight() == NULL) {
-                cout << "left" << endl;
+                // cout << "left" << endl;
                 if (left) {
                     if (prev != NULL) {
                         prev->setLeft(curr->getLeft());
@@ -587,7 +587,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                     delete curr;
                 }
             } else {
-                cout << "l" << endl;
+                // cout << "l" << endl;
                 Node<Key, Value> *max = curr->getLeft();
                 left = true;
                 while (max->getRight() != NULL) {
@@ -709,6 +709,7 @@ template<typename Key, typename Value>
 bool BinarySearchTree<Key, Value>::isBalanced() const
 {
     cout << "balancer" << endl;
+    if (root_ = NULL) return true;
     return (subbalance(root_) != -1);
 }
 
