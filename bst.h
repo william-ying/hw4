@@ -562,18 +562,14 @@ template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
     Node<Key, Value>* temp = root_;
-    bool left;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
             temp = temp->getLeft();
-            left = true;
         }
         while (temp->getRight() != NULL) {
             temp = temp->getRight();
-            left = false;
             while (temp->getLeft() != NULL) {
                 temp = temp->getLeft();
-                left = true;
             }
         }
         Node<Key, Value>* temp1 = temp->getParent();
@@ -581,11 +577,9 @@ void BinarySearchTree<Key, Value>::clear()
         if (temp1 == NULL) {
             break;
         }
-        if (left) {
-            temp1->setLeft(NULL);
-        } else {
-            temp1->setRight(NULL);
-        }
+        temp1->setLeft(NULL);
+        temp1->setRight(NULL);
+        
         temp = temp1;
     }
 }
@@ -616,7 +610,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
-    cout << key << endl;
+    // cout << key << endl;
     Node<Key, Value>* curr = root_;
     // if (curr == NULL) cout << "null" << endl;
     while (curr != NULL) {
