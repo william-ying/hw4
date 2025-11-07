@@ -600,7 +600,7 @@ template<typename Key, typename Value>
 Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
-    Node<Key, Value>* temp = root_;
+    Node<Key, Value>* temp = this->root_;
     if (temp == NULL) cout << "null" << endl;
     cout << "small find" << endl;
     while (temp->getLeft() != NULL) {
