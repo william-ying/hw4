@@ -342,7 +342,7 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     cout << "plussing" << endl;
-    if (current_->getLeft() != NULL) cout << current_->getKey() << endl;
+    if (current_->getLeft() != NULL) cout << "no left" << current_->getKey() << endl;
     while (current_->getRight() == NULL) {
         // cout << "right" << endl;
         Node<Key, Value>* temp = current_;
