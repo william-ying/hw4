@@ -515,8 +515,6 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         return;
     }
 
-    cout << "rem " << key << endl;
-
     bool left = false;
     while (curr != NULL) {
         if (curr->getKey() < key) {
@@ -528,41 +526,64 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         }
     }
 
-    cout << "rem " << key << endl;
-
     while (curr != NULL) {
+        // if (curr->getLeft() != NULL) {
+        //     nodeSwap(curr, curr->getLeft());
+        //     left = true;
+        //     cout << "left" << curr->getKey() << curr->getParent()->getKey() << endl;
+        // } else {
+        //     cout << "right" << endl;
+        //     if (curr->getRight() == NULL) {
+        //         if (left) curr->getParent()->setLeft(NULL);
+        //         else curr->getParent()->setRight(NULL);
+        //         delete curr;
+        //         return;
+        //     }
+        //     if (left) {
+        //         Node<Key, Value>* turn = curr;
+        //         curr = curr->getRight();
+        //         nodeSwap(turn, turn->getParent());
+        //         while (curr->getLeft() == NULL) {
+        //             cout << "right slope " << curr->getKey() << " " << turn->getKey() << endl;
+        //             if (curr->getRight() == NULL) {
+        //                 nodeSwap(curr, turn);
+        //                 cout << curr->getKey() << turn->getKey() << endl;
+        //                 turn->getParent()->setRight(NULL);
+        //                 delete turn;
+        //                 return;
+        //             }
+        //             curr = curr->getRight();
+        //         }
+        //         nodeSwap(curr, turn);
+        //         curr = turn;
+        //         left = false;
+        //     } else {
+        //         nodeSwap(curr, curr->getRight());
+        //     }
+        // }
+        Node<Key, Value>* prev;
         if (curr->getLeft() != NULL) {
-            nodeSwap(curr, curr->getLeft());
-            left = true;
-            cout << "left" << curr->getKey() << curr->getParent()->getKey() << endl;
+            prev = curr -> getLeft();
+        } else if (curr->getRight() != NULL) {
+            prev = curr -> getRight();
         } else {
-            cout << "right" << endl;
-            if (curr->getRight() == NULL) {
-                if (left) curr->getParent()->setLeft(NULL);
-                else curr->getParent()->setRight(NULL);
-                delete curr;
-                return;
-            }
-            if (left) {
-                Node<Key, Value>* turn = curr;
-                curr = curr->getRight();
-                nodeSwap(turn, turn->getParent());
-                while (curr->getLeft() == NULL) {
-                    cout << "right slope " << curr->getKey() << " " << turn->getKey() << endl;
-                    if (curr->getRight() == NULL) {
-                        nodeSwap(curr, turn);
-                        cout << curr->getKey() << turn->getKey() << endl;
-                        turn->getParent()->setRight(NULL);
-                        delete turn;
-                        return;
-                    }
-                    curr = curr->getRight();
-                }
-                nodeSwap(curr, turn);
-                curr = turn;
-                left = false;
+            prev = curr -> getParent();
+            if (prev->getLeft() == curr) {
+                prev->setLeft(NULL);
             } else {
-                nodeSwap(curr, curr->getRight());
+                prev->setRight(NULL);
+            }
+            delete curr;
+            return;
+        }
+        nodeSwap(prev, curr);
+        while (prev->getParent() != NULL) {
+            if (prev->getParent()->getLeft() == prev) {
+                if (prev->getKey() > prev->getParent()->getKey()) nodeSwap(prev, prev->getParent);
+                else break;
+            } else {
+                if (prev->getKey() < prev->getParent()->getKey()) nodeSwap(prev, prev->getParent);
+                else break;
             }
         }
     }
