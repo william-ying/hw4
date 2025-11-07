@@ -345,7 +345,7 @@ BinarySearchTree<Key, Value>::iterator::operator++()
     while (current_->getRight() == NULL) {
         Node<Key, Value>* temp = current_;
         current_ = current_->getParent();
-        if (current_->getLeft() == temp) {
+        if (current_->getLeft() != NULL && current_->getLeft() == temp) {
             cout << current_->getKey() << " l " << current_->getValue() << endl;
             return *this;
         }
