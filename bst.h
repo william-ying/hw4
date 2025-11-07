@@ -346,7 +346,8 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         Node<Key, Value>* temp = current_;
         if (current_->getParent() == NULL) {
             BinarySearchTree<Key, Value>::iterator end(NULL);
-            return end;
+            *this = end;
+            return *this;
         }
         current_ = current_->getParent();
         if (current_->getLeft() != NULL && current_->getLeft() == temp) {
