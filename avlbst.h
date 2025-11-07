@@ -246,7 +246,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
-    AVLNode<Key, Value> *curr = this.root_;
+    AVLNode<Key, Value> *curr = this->root_;
     AVLNode<Key, Value> *par = NULL;
     if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
