@@ -565,6 +565,7 @@ void BinarySearchTree<Key, Value>::clear()
 {
     // cout << "clear" << endl;
     Node<Key, Value>* temp = root_;
+    if (root_ = NULL) return;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
             temp = temp->getLeft();
