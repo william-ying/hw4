@@ -517,7 +517,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
     
     bool left = false;
-    Node<Key, Value> * rightlimit = NULL;
+    Node<Key, Value> * rightlimit = root_;
     while (curr != NULL) {
         if (curr->getKey() < key) {
             curr = curr->getRight();
@@ -531,7 +531,6 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         }
     }
     
-    bool left = true;
     while (curr != NULL) {
         if (curr->getLeft() != NULL) {
             nodeSwap(curr, curr->getLeft());
@@ -540,8 +539,8 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         } else if (curr->getRight() != NULL) {
             nodeSwap(curr, curr->getRight());
             if (rightlimit == curr) rightlimit = curr->getParent();
-            Node<Key, Value> *swap = curr->getParent();
             else {
+                Node<Key, Value> *swap = curr->getParent();
                 while (swap->getParent() != rightlimit) nodeSwap(swap, swap->getParent());
                 nodeSwap(swap, rightlimit);
                 rightlimit = swap;
