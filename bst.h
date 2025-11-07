@@ -254,7 +254,7 @@ protected:
 
 
 protected:
-    virtual Node<Key, Value>* root_;
+    Node<Key, Value>* root_;
     // You should not need other data members
 };
 
@@ -601,8 +601,8 @@ Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = this->root_;
-    if (temp == NULL) cout << "null" << endl;
-    cout << "small find" << endl;
+    // if (temp == NULL) cout << "null" << endl;
+    // cout << "small find" << endl;
     while (temp->getLeft() != NULL) {
         temp = temp->getLeft();
     }
