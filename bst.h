@@ -362,7 +362,7 @@ BinarySearchTree<Key, Value>::BinarySearchTree()
 template<typename Key, typename Value>
 BinarySearchTree<Key, Value>::~BinarySearchTree()
 {
-    // TODO
+    clear();
 
 }
 
