@@ -518,6 +518,7 @@ template<class Key, class Value>
 void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &keyValuePair)
 {
     Node<Key, Value> *curr = root_;
+    if (curr == NULL) curr = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
     while (curr != NULL) {
         if (curr->getKey() > keyValuePair.first) {
             if (curr->getRight() != NULL) {
