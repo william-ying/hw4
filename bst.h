@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <utility>
 
+using namespace std;
+
 /**
  * A templated class for a Node in a search tree.
  * The getters for parent/left/right are virtual so
