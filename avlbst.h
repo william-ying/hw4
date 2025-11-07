@@ -148,7 +148,94 @@ protected:
 template<class Key, class Value>
 void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 {
-    // TODO
+    AVLNode<Key, Value> *curr = root_;
+    AVLNode<Key, Value> *back = NULL;
+    bool left = false;
+    while (curr != NULL) {
+        if (curr->getKey() < new_item.first) {
+            // cout << "right " << curr->getKey() << keyValuePair.first << endl;
+            back = curr;
+            curr = curr -> getRight();
+            left = false;
+        } else if (curr->getKey() > new_item.first) {
+            // cout << "left " << curr->getKey() << keyValuePair.first << endl;
+            back = curr;
+            curr = curr -> getLeft();
+            left = true;
+        } else {
+            curr->setValue(new_item.second);
+            break;
+        }
+    }
+    if (root_ == NULL) {
+        root_ = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
+        root_->setBalance(0);
+        return;
+    }
+    if (back == NULL) {}
+    else if (left) {
+        back->setLeft(new AVLNode<Key, Value>(keyValuePair.first, keyValuePair.second, back));
+        curr = back->getLeft();
+    } else {
+        back->setRight(new AVLNode<Key, Value>(keyValuePair.first, keyValuePair.second, back));
+        curr = back->getRight();
+    }
+
+    curr->setBalance(0);
+    while (curr != NULL) {
+        curr = curr->getParent();
+        int left, right, left1, right1;
+        if (curr->getLeft() == NULL) left = 0;
+        else left = curr->getLeft()->getBalance();
+        if (curr->getRight() == NULL) right = 0;
+        else right = curr->getRight()->getBalance();
+        
+        if (left > right + 1) {
+            AVLNode<Key, Value>* currt = curr -> getLeft();
+            if (currt->getLeft() == NULL) left1 = 0;
+            else left1 = currt->getLeft()->getBalance();
+            if (currt->getRight() == NULL) right1 = 0;
+            else right1 = currt->getRight()->getBalance();
+
+            
+            if (right1 > left1) {
+                AVLNode<Key, Value>* currt2 = currt -> getRight();
+                nodeSwap(currt2, currt->getLeft());
+                nodeSwap(currt2->getLeft(), currt->getRight());
+                nodeSwap(currt2->getRight(), currt->getRight());
+            }
+            
+            nodeSwap(currt->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft()->getLeft(), currt->getLeft()->getRight());
+            nodeSwap(curr->getRight()->getLeft(), currt->getRight()->getRight());
+        } else if (left + 1 < right) {
+            currt = curr -> getRight();
+            if (currt->getLeft() == NULL) left1 = 0;
+            else left1 = currt->getLeft()->getBalance();
+            if (currt->getRight() == NULL) right1 = 0;
+            else right1 = currt->getRight()->getBalance();
+
+            if (right1 < left1) {
+                AVLNode<Key, Value>* currt2 = currt -> getLeft();
+                nodeSwap(currt2, currt->getRight());
+                nodeSwap(currt2->getRight(), currt->getLeft());
+                nodeSwap(currt2->getLeft(), currt->getLeft());
+            }
+            
+            nodeSwap(currt->getRight(), curr->getLeft());
+            nodeSwap(curr->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft()->getLeft(), currt->getLeft()->getRight());
+            nodeSwap(curr->getRight()->getLeft(), currt->getRight()->getRight());
+        }
+
+        if (curr->getLeft() == NULL) left = 0;
+        else left = curr->getLeft()->getBalance();
+        if (curr->getRight() == NULL) right = 0;
+        else right = curr->getRight()->getBalance();
+
+        curr -> setBalance(max(left, right) + 1);
+    }
 }
 
 /*
@@ -158,7 +245,100 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
-    // TODO
+    AVLNode<Key, Value> *curr = root_;
+    AVLNode<Key, Value> *par = NULL;
+    if (curr->getKey() == key) {
+        if (curr->getLeft() == NULL && curr->getRight() == NULL) {
+            delete curr;
+        }
+    }
+    bool left = false;
+    while (curr != NULL) {
+        if (curr->getKey() > key) {
+            curr = curr->getRight();
+            left = false;
+        } else if (curr->getKey() < key) {
+            curr = curr->getLeft();
+            left = true;
+        } else {
+            break;
+        }
+    }
+    while (curr != NULL) {
+        if (curr->getLeft() != NULL) {
+            nodeSwap(curr, curr->getLeft());
+            curr = curr->getLeft();
+            left = true;
+        } else if (curr->getRight() != NULL) {
+            nodeSwap(curr, curr->getRight());
+            curr = curr->getRight();
+            left = false;
+        } else {
+            if (left) {
+                curr->getParent()->setLeft(NULL);
+            } else {
+                curr->getParent()->setRight(NULL);
+            }
+            par = curr->getParent();
+            delete curr;
+        }
+    }
+
+    curr = par;
+    while (curr != NULL) {
+        int left, right, left1, right1;
+        if (curr->getLeft() == NULL) left = 0;
+        else left = curr->getLeft()->getBalance();
+        if (curr->getRight() == NULL) right = 0;
+        else right = curr->getRight()->getBalance();
+        
+        if (left > right + 1) {
+            AVLNode<Key, Value>* currt = curr -> getLeft();
+            if (currt->getLeft() == NULL) left1 = 0;
+            else left1 = currt->getLeft()->getBalance();
+            if (currt->getRight() == NULL) right1 = 0;
+            else right1 = currt->getRight()->getBalance();
+
+            
+            if (right1 > left1) {
+                AVLNode<Key, Value>* currt2 = currt -> getRight();
+                nodeSwap(currt2, currt->getLeft());
+                nodeSwap(currt2->getLeft(), currt->getRight());
+                nodeSwap(currt2->getRight(), currt->getRight());
+            }
+            
+            nodeSwap(currt->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft()->getLeft(), currt->getLeft()->getRight());
+            nodeSwap(curr->getRight()->getLeft(), currt->getRight()->getRight());
+        } else if (left + 1 < right) {
+            currt = curr -> getRight();
+            if (currt->getLeft() == NULL) left1 = 0;
+            else left1 = currt->getLeft()->getBalance();
+            if (currt->getRight() == NULL) right1 = 0;
+            else right1 = currt->getRight()->getBalance();
+
+            if (right1 < left1) {
+                AVLNode<Key, Value>* currt2 = currt -> getLeft();
+                nodeSwap(currt2, currt->getRight());
+                nodeSwap(currt2->getRight(), currt->getLeft());
+                nodeSwap(currt2->getLeft(), currt->getLeft());
+            }
+            
+            nodeSwap(currt->getRight(), curr->getLeft());
+            nodeSwap(curr->getLeft(), curr->getRight());
+            nodeSwap(curr->getLeft()->getLeft(), currt->getLeft()->getRight());
+            nodeSwap(curr->getRight()->getLeft(), currt->getRight()->getRight());
+        }
+
+        if (curr->getLeft() == NULL) left = 0;
+        else left = curr->getLeft()->getBalance();
+        if (curr->getRight() == NULL) right = 0;
+        else right = curr->getRight()->getBalance();
+
+        curr -> setBalance(max(left, right) + 1);
+        curr = curr->getParent();
+    }
 }
 
 template<class Key, class Value>
