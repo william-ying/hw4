@@ -328,7 +328,7 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
 {
     cout << "!=" << endl;
     if (current_ == NULL) return false;
-    cout << this->current_->getKey() << endl;
+    // cout << this->current_->getKey() << endl;
     return !(this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
 }
 
@@ -475,7 +475,7 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
         }
     }
     if (curr == NULL) curr = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
-    cout << curr->getKey() << " " << curr->getValue() << endl << endl;
+    cout << root_->getKey() << " " << root_->getValue() << endl << endl;
 
 }
 
