@@ -548,16 +548,16 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 curr = curr->getRight();
                 nodeSwap(turn, turn->getLeft());
                 while (curr->getLeft() == NULL) {
-                    cout << "right slope" << endl;
+                    cout << "right slope" << curr->getKey() << " " << turn->getKey() << endl;
                     if (curr->getRight() == NULL) {
                         nodeSwap(curr, turn);
                         curr->getParent()->setRight(NULL);
                         delete curr;
                         return;
                     }
-                    nodeSwap(curr, turn);
                     curr = curr->getRight();
                 }
+                nodeSwap(curr, turn);
                 left = false;
             } else {
                 nodeSwap(curr, curr->getRight());
