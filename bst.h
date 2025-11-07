@@ -341,16 +341,16 @@ template<class Key, class Value>
 typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
-    cout << "plussing" << endl;
+    // cout << "plussing" << endl;
     while (current_->getRight() == NULL) {
-        // cout << "right" << endl;
-        Node<Key, Value>* temp = current_;
+        cout << "right" << endl;
         if (current_->getParent() == NULL) {
             // cout << "no p" << endl;
             BinarySearchTree<Key, Value>::iterator end(NULL);
             *this = end;
             return *this;
         }
+        Node<Key, Value>* temp = current_;
         current_ = current_->getParent();
         if (current_->getLeft() != NULL && current_->getLeft() == temp) {
             cout << current_->getKey() << " l " << current_->getValue() << endl;
@@ -358,7 +358,7 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         }
     }
     current_ = current_->getRight();
-    // cout << current_->getKey() << " r " << current_->getValue() << endl;
+    cout << current_->getKey() << " r " << current_->getValue() << endl;
     return *this;
 }
 
