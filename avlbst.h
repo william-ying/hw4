@@ -144,7 +144,7 @@ protected:
 template<class Key, class Value>
 AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree()
 {
-    root_ = NULL;
+    this->root_ = NULL;
 }
 
 
