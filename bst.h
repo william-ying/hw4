@@ -509,87 +509,97 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
     cout << "rem " << key << endl;
     Node<Key, Value> *curr = root_;
     if (root_ == NULL) return;
-    if (root_->getKey() == key && root_->getLeft() == NULL && root_->getRight() == NULL) {
-        delete root_;
-        root_ = NULL;
-        return;
-    }
 
-    bool left = false;
+    Node<Key, Value> *prev = NULL;;
     while (curr != NULL) {
         if (curr->getKey() < key) {
+            prev = curr;
             curr = curr->getRight();
+            left = false;
         } else if (curr->getKey() > key) {
+            prev = curr;
             curr = curr->getLeft();
+            left = true;
         } else {
             break;
         }
     }
 
-    while (curr != NULL) {
-        // if (curr->getLeft() != NULL) {
-        //     nodeSwap(curr, curr->getLeft());
-        //     left = true;
-        //     cout << "left" << curr->getKey() << curr->getParent()->getKey() << endl;
-        // } else {
-        //     cout << "right" << endl;
-        //     if (curr->getRight() == NULL) {
-        //         if (left) curr->getParent()->setLeft(NULL);
-        //         else curr->getParent()->setRight(NULL);
-        //         delete curr;
-        //         return;
-        //     }
-        //     if (left) {
-        //         Node<Key, Value>* turn = curr;
-        //         curr = curr->getRight();
-        //         nodeSwap(turn, turn->getParent());
-        //         while (curr->getLeft() == NULL) {
-        //             cout << "right slope " << curr->getKey() << " " << turn->getKey() << endl;
-        //             if (curr->getRight() == NULL) {
-        //                 nodeSwap(curr, turn);
-        //                 cout << curr->getKey() << turn->getKey() << endl;
-        //                 turn->getParent()->setRight(NULL);
-        //                 delete turn;
-        //                 return;
-        //             }
-        //             curr = curr->getRight();
-        //         }
-        //         nodeSwap(curr, turn);
-        //         curr = turn;
-        //         left = false;
-        //     } else {
-        //         nodeSwap(curr, curr->getRight());
-        //     }
-        // }
-        Node<Key, Value>* prev;
-        if (curr->getLeft() != NULL) {
-            prev = curr -> getLeft();
-        } else if (curr->getRight() != NULL) {
-            prev = curr -> getRight();
-        } else {
-            prev = curr -> getParent();
-            if (prev->getLeft() == curr) {
-                prev->setLeft(NULL);
+    if (curr != NULL) {
+        if (curr->getLeft() == NULL) {
+            if (curr->getRight() == NULL) {
+                if (left) {
+                    if (prev != NULL) prev->setLeft(NULL);
+                    delete curr;
+                } else {
+                    if (prev != NULL) prev->setRight(NULL);
+                    delete curr;
+                }
             } else {
-                prev->setRight(NULL);
+                if (left) {
+                    if (prev != NULL) prev->setLeft(curr->getRight());
+                    else root_ = curr->getRight();
+                    delete curr;
+                } else {
+                    if (prev != NULL) prev->setRight(curr->getRight());
+                    else root_ = curr->getRight();
+                    delete curr;
+                }
             }
-            delete curr;
-            return;
-        }
-        nodeSwap(prev, curr);
-        while (prev->getParent() != NULL) {
-            Node<Key, Value>* temp = prev->getParent();
-            if (temp->getLeft() == prev) {
-                if (prev->getKey() > temp->getKey()) nodeSwap(prev, temp);
-                else break;
+        } else {
+            if (curr->getRight() == NULL) {
+                if (left) {
+                    if (prev != NULL) prev->setLeft(curr->getLeft());
+                    else root_ = curr->getLeft();
+                    delete curr;
+                } else {
+                    if (prev != NULL) prev->setRight(curr->getLeft());
+                    else root_ = curr->getLeft();
+                    delete curr;
+                }
             } else {
-                if (prev->getKey() < temp->getKey()) nodeSwap(prev, temp);
-                else break;
+                Node<Key, Value> *max = curr->getLeft();
+                while (max->getRight() != NULL) max = max->getRight();
+                nodeSwap(max, curr);
+                if (curr->getLeft() == NULL) {
+                    curr->getParent()->setRight(NULL);
+                    delete curr;
+                } else {
+                    curr->getParent()->setRight(curr->getLeft());
+                    delete curr;
+                }
             }
         }
     }
-        cout << "rem " << key << endl;
 
+    // while (curr != NULL) {
+    //     Node<Key, Value>* prev;
+    //     if (curr->getLeft() != NULL) {
+    //         prev = curr -> getLeft();
+    //     } else if (curr->getRight() != NULL) {
+    //         prev = curr -> getRight();
+    //     } else {
+    //         prev = curr -> getParent();
+    //         if (prev->getLeft() == curr) {
+    //             prev->setLeft(NULL);
+    //         } else {
+    //             prev->setRight(NULL);
+    //         }
+    //         delete curr;
+    //         return;
+    //     }
+    //     nodeSwap(prev, curr);
+    //     while (prev->getParent() != NULL) {
+    //         Node<Key, Value>* temp = prev->getParent();
+    //         if (temp->getLeft() == prev) {
+    //             if (prev->getKey() > temp->getKey()) nodeSwap(prev, temp);
+    //             else break;
+    //         } else {
+    //             if (prev->getKey() < temp->getKey()) nodeSwap(prev, temp);
+    //             else break;
+    //         }
+    //     }
+    // }
 
 
 }
