@@ -506,6 +506,7 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::remove(const Key& key)
 {
+    cout << "rem " << key << endl;
     Node<Key, Value> *curr = root_;
     if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
@@ -561,6 +562,7 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
+    cout << "clear" << endl;
     Node<Key, Value>* temp = root_;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
@@ -610,7 +612,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
-    // cout << key << endl;
+    cout << "find " << key << endl;
     Node<Key, Value>* curr = root_;
     // if (curr == NULL) cout << "null" << endl;
     while (curr != NULL) {
@@ -633,6 +635,7 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
 template<typename Key, typename Value>
 bool BinarySearchTree<Key, Value>::isBalanced() const
 {
+    cout << "balancer" << endl;
     return (subbalance(root_) != -1);
 }
 
