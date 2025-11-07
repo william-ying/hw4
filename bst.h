@@ -324,7 +324,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    return !(this->current->getKey() == rhs->first && this->current_->getValue() == rhs->second);
+    return !(this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
 }
 
 
