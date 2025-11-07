@@ -528,6 +528,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
     if (curr != NULL) {
         if (curr->getLeft() == NULL) {
+            cout << "right" << endl;
             if (curr->getRight() == NULL) {
                 if (left) {
                     if (prev != NULL) prev->setLeft(NULL);
@@ -551,6 +552,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             }
         } else {
             if (curr->getRight() == NULL) {
+                cout << "left" << endl;
                 if (left) {
                     if (prev != NULL) prev->setLeft(curr->getLeft());
                     else root_ = curr->getLeft();
@@ -561,6 +563,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                     delete curr;
                 }
             } else {
+                cout << "l" << endl;
                 Node<Key, Value> *max = curr->getLeft();
                 while (max->getRight() != NULL) max = max->getRight();
                 nodeSwap(max, curr);
