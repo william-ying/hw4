@@ -667,6 +667,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
+    cout << key << endl;
     Node<Key, Value>* curr = root_;
     while (curr != NULL) {
         if (curr->getKey() > key) {
