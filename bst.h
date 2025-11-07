@@ -312,8 +312,31 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs->getSmallestNode();
+    Node<Key, Value>* temp1 = this->current_;
+    while (temp1 != NULL) {
+        while (temp1->getLeft() != NULL) {
+            temp1 = temp1->getLeft();
+        }
+        while (temp1->getRight() != NULL) {
+            temp1 = temp1->getRight();
+            while (temp1->getLeft() != NULL) {
+                temp1 = temp1->getLeft();
+            }
+        }
+    }
+    
+    Node<Key, Value>* temp2 = rhs->current_;
+    while (temp2 != NULL) {
+        while (temp2->getLeft() != NULL) {
+            temp2 = temp2->getLeft();
+        }
+        while (temp2->getRight() != NULL) {
+            temp2 = temp2->getRight();
+            while (temp2->getLeft() != NULL) {
+                temp2 = temp2->getLeft();
+            }
+        }
+    }
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() == temp2->getValue()) {
@@ -351,8 +374,31 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs->getSmallestNode();
+    Node<Key, Value>* temp1 = this->current_;
+    while (temp1 != NULL) {
+        while (temp1->getLeft() != NULL) {
+            temp1 = temp1->getLeft();
+        }
+        while (temp1->getRight() != NULL) {
+            temp1 = temp1->getRight();
+            while (temp1->getLeft() != NULL) {
+                temp1 = temp1->getLeft();
+            }
+        }
+    }
+    
+    Node<Key, Value>* temp2 = rhs->current_;
+    while (temp2 != NULL) {
+        while (temp2->getLeft() != NULL) {
+            temp2 = temp2->getLeft();
+        }
+        while (temp2->getRight() != NULL) {
+            temp2 = temp2->getRight();
+            while (temp2->getLeft() != NULL) {
+                temp2 = temp2->getLeft();
+            }
+        }
+    }
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() != temp2->getValue()) {
