@@ -516,14 +516,14 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
             if (curr->getRight() != NULL) {
                 curr = curr->getRight();
             } else {
-                curr->setRight(new Node(keyValuePair.first, keyValuePair.second, curr);
+                curr->setRight(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr);
                 break;
             }
         } else if (curr->getKey() < keyValuePair.first) {
             if (curr->getLeft() != NULL) {
                 curr = curr->getLeft();
             } else {
-                curr->setLeft(new Node(keyValuePair.first, keyValuePair.second, curr);
+                curr->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr);
                 break;
             }
         } else {
@@ -562,11 +562,11 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
     }
     while (curr != NULL) {
         if (curr->getLeft() != NULL) {
-            nodeSwap(curr, curr->getLeft();
+            nodeSwap(curr, curr->getLeft());
             curr = curr->getLeft();
             left = true;
         } else if (curr->getRight() != NULL) {
-            nodeSwap(curr, curr->getRight();
+            nodeSwap(curr, curr->getRight());
             curr = curr->getRight();
             left = false;
         } else {
