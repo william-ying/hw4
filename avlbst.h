@@ -1,4 +1,4 @@
-#ifndef AVLBST_H
+    #ifndef AVLBST_H
 #define AVLBST_H
 
 #include <iostream>
@@ -226,7 +226,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 nodeSwap(curr, curr->getLeft());
                 currt = curr->getParent();
                 curr = currt->getParent();
-                cout << "curr " << curr->getKey() << endl;
+                // cout << "curr " << curr->getKey() << endl;
                 currt->getLeft()->setParent(curr);
                 curr->setRight(currt->getLeft());
                 currt->setLeft(NULL);
@@ -269,8 +269,9 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 AVLNode<Key, Value> *tempcurr = curr;
                 nodeSwap(curr, curr->getRight());
                 nodeSwap(curr, curr->getRight());
-                curr = tempcurr;
-                currt = curr->getRight();
+                currt = curr->getParent();
+                curr = currt->getParent();
+                // cout << "curr " << curr->getKey() << endl;
                 currt->getRight()->setParent(curr);
                 curr->setLeft(currt->getRight());
                 currt->setRight(NULL);
