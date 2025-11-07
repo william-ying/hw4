@@ -20,8 +20,8 @@ bool equalPaths(Node * root)
 
 int depth(Node * root) {
     if (root->left == NULL && root->right == NULL) return 0;
-    else if (root->right == NULL) return depth(root->left);
-    else if (root->left == NULL) return depth(root->right);
+    else if (root->right == NULL) return depth(root->left) + 1;
+    else if (root->left == NULL) return depth(root->right + 1);
     else if (depth(root->left) == -1 || depth(root->right) == -1) return -1;
     else if (depth(root->left) == depth(root->right)) {return depth(root->left) + 1;}
     else {
