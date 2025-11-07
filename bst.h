@@ -552,11 +552,9 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                     if (curr->getRight() == NULL) {
                         nodeSwap(curr, turn);
                         cout << root_->getKey() << endl;
-                        cout << "line 1" << endl;
-                        turn = curr->getParent();
-                        cout << "line 2" << endl;
+                        curr->getParent()->setRight(NULL);
+                        cout << "line" << endl;
                         delete curr;
-                        return;
                     }
                     curr = curr->getRight();
                 }
