@@ -487,10 +487,11 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
             left = true;
         } else {
             curr->setValue(keyValuePair.second);
-            return;
+            break;
         }
     }
-    if (left) back->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back));
+    if (back == NULL)
+    else if (left) back->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back));
     else back->setRight(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back));
     
     if (root_ == NULL) root_ = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
