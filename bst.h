@@ -358,7 +358,7 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         }
     }
     current_ = current_->getRight();
-    cout << current_->getKey() << " r " << current_->getValue() << endl;
+    // cout << current_->getKey() << " r " << current_->getValue() << endl;
     return *this;
 }
 
