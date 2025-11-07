@@ -329,7 +329,7 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
 {
     
     if (this->current_ == NULL) {
-        cout << "null cur" << endl;
+        // cout << "null cur" << endl;
         return (rhs != NULL);
     }
     return !(this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
