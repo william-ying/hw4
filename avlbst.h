@@ -195,14 +195,18 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     curr->setBalance(0);
     while (curr ->getParent() != NULL) {
         AVLNode<Key, Value>* currt;
+        cout << curr->getKey() << " " << curr->getBalance();
         curr = curr->getParent();
         int left, right, left1, right1;
         if (curr->getLeft() == NULL) left = 0;
-        else left = curr->getLeft()->getBalance();
+        else left = curr->getLeft()->getBalance() + 1;
         
         if (curr->getRight() == NULL) right = 0;
-        else right = curr->getRight()->getBalance();
+        else right = curr->getRight()->getBalance() + 1;
+
+        
         cout << curr->getKey() << " " << left << " " << right << endl;
+        
         if (left > right + 1) {
             currt = curr -> getLeft();
             if (currt->getLeft() == NULL) left1 = 0;
