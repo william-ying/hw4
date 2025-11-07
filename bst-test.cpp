@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
     bt.insert(std::make_pair('b',2));
     
     cout << "Binary Search Tree contents:" << endl;
-    if (bt.begin() == NULL) {
+    BinarySearchTree<char,int>::iterator temp = bt.begin()
+    if (temp == NULL) {
         cout << "null begin" << endl;
     }
     for(BinarySearchTree<char,int>::iterator it = bt.begin(); it != bt.end(); ++it) {
