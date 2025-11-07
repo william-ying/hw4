@@ -348,7 +348,34 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    // TODO
+    Node* temp1 = this.current_->getSmallestNode();
+    Node* temp2 = rhs.current_->getSmallestNode();
+    stack<Node*> rlog;
+    stack<Node*> rhslog;
+    while (temp1->getValue() != temp2->getValue()) {
+        if (temp1->getLeft() != NULL) {
+            if (temp2 -> getLeft() == NULL) return false;
+            if (temp1->getRight() != NULL) {
+                if (temp2 -> getRight() == NULL) return false;
+                rlog.push(temp1.getRight());
+                rhslog.push(temp2.getRight());
+            }
+            temp1 = temp1->getLeft();
+            temp2 = temp2->getLeft();
+        } else if (temp1->getRight() != NULL) {
+            if (temp2->getRight() == NULL) return false;
+            temp1 = temp1->getRight();
+            temp2 = temp2->getRight();
+        } else if (rlog.empty()){
+            return true;
+        } else {
+            temp1 = rlog.top();
+            rlog.pop();
+            temp2 = rhslog.top();
+            rhslog.pop();
+        }
+    }
+    return false;
 
 }
 
