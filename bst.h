@@ -503,7 +503,33 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
-    // TODO
+    Node* temp = root_;
+    bool left;
+    while (temp != NULL) {
+        while (temp->getLeft() != NULL) {
+            temp = temp->getLeft();
+            left = true;
+        }
+        while (temp->getRight() != NULL) {
+            temp = temp->getRight();
+            left = false;
+            while (temp->getLeft() != NULL) {
+                temp = temp->getLeft();
+                left = true;
+            }
+        }
+        Node* temp1 = temp->getParent();
+        delete temp;
+        if (temp1 == NULL) {
+            break;
+        }
+        if (left) {
+            temp1->setLeft(NULL);
+        } else {
+            temp1->setRight(NULL);
+        }
+        temp = temp1;
+    }
 }
 
 
