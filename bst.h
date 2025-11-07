@@ -342,10 +342,12 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     cout << "plussing" << endl;
+    cout << current_->getKey() << endl;
     while (current_->getRight() == NULL) {
         cout << "right" << endl;
         Node<Key, Value>* temp = current_;
         if (current_->getParent() == NULL) {
+            cout << "no p" << endl;
             BinarySearchTree<Key, Value>::iterator end(NULL);
             *this = end;
             return *this;
@@ -594,11 +596,11 @@ Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = root_;
-    cout << "small find" << endl;
+    // cout << "small find" << endl;
     while (temp->getLeft() != NULL) {
         temp = temp->getLeft();
     }
-    cout << temp->getKey() << endl;
+    // cout << temp->getKey() << endl;
     return temp;
 }
 
