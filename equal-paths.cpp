@@ -24,7 +24,7 @@ int depth(Node * root) {
         if (depth(root->left) != -1) return depth(root->left) + 1;
         else {return -1;}
     } else if (root->left == NULL) {
-        if (depth(root->right) != -1) return depth(root->right + 1);
+        if (depth(root->right) != -1) return depth(root->right) + 1;
         else {return -1;}
     }
     else if (depth(root->left) == -1 || depth(root->right) == -1) return -1;
