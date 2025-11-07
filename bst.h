@@ -327,6 +327,7 @@ BinarySearchTree<Key, Value>::iterator::operator==(
     
 
     stack<Node<Key, Value>*> rlog;
+    if (temp1 == NULL) return false;
     while (temp1->getValue() == rhs->second) {
         if (temp1->getLeft() != NULL) {
             if (temp1->getRight() != NULL) {
@@ -368,6 +369,7 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
     }
     
     stack<Node<Key, Value>*> rlog;
+    if (temp1 == NULL) return false;
     while (temp1->getValue() != rhs->second) {
         if (temp1->getLeft() != NULL) {
             if (temp1->getRight() != NULL) {
