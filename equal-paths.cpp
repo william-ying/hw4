@@ -14,6 +14,7 @@ using namespace std;
 bool equalPaths(Node * root)
 {
     if (root == NULL) return true;
+    if (root->left == NULL || root->right == NULL) return true;
     return (depth(root->left) == depth(root->right));
 
 }
