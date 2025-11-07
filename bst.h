@@ -517,15 +517,11 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
     
     bool left = false;
-    Node<Key, Value> * rightlimit = root_;
     while (curr != NULL) {
         if (curr->getKey() < key) {
             curr = curr->getRight();
-            left = false;
         } else if (curr->getKey() > key) {
             curr = curr->getLeft();
-            rightlimit = curr;
-            left = true;
         } else {
             break;
         }
@@ -534,26 +530,24 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
     while (curr != NULL) {
         if (curr->getLeft() != NULL) {
             nodeSwap(curr, curr->getLeft());
-            rightlimit = curr;
             left = true;
-        } else if (curr->getRight() != NULL) {
-            nodeSwap(curr, curr->getRight());
-            if (rightlimit == curr) rightlimit = curr->getParent();
-            else {
-                Node<Key, Value> *swap = curr->getParent();
-                while (swap->getParent() != rightlimit) nodeSwap(swap, swap->getParent());
-                nodeSwap(swap, rightlimit);
-                rightlimit = swap;
-            }
-            left = false;
         } else {
             if (left) {
-                curr->getParent()->setLeft(NULL);
+                Node<Key, Value>* turn = curr->getParent();
+                nodeSwap(curr, curr->getRight());
+                while (curr->getLeft() == NULL) {
+                    if (curr->getRight() == NULL) {
+                        nodeSwap(curr, turn);
+                        curr->getParent()->setRight(NULL);
+                        delete curr;
+                        return;
+                    }
+                    curr = curr->getRight();
+                }
+                left = false;
             } else {
-                curr->getParent()->setRight(NULL);
+                nodeSwap(curr, curr->getRight());
             }
-            delete curr;
-            break;
         }
     }
 
