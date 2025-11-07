@@ -387,8 +387,16 @@ template<class Key, class Value>
 typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
-    // TODO
-
+    while (current_->getRight() == NULL) {
+        Node* temp = current_;
+        current_ = current_->getParent();
+        if (current_->getLeft() == temp) {
+            BinarySearchTree<Key, Value>::iterator begin(current_);
+            return begin;
+        }
+    }
+    BinarySearchTree<Key, Value>::iterator begin(current_->getRight());
+    return begin;
 }
 
 
