@@ -141,6 +141,12 @@ protected:
 
 };
 
+template<class Key, class Value>
+AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree()
+{
+    root = NULL;
+}
+
 /*
  * Recall: If key is already in the tree, you should 
  * overwrite the current value with the updated value.
