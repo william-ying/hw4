@@ -150,7 +150,7 @@ AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree(
 
 template<typename Key, typename Value>
 AVLNode<Key, Value>*
-AVLTree<Key, Value>::getSmallestNode() const
+AVLTree<Key, Value>::getSmallestNode() const override
 {
     Node<Key, Value>* temp = this->root_;
     // if (temp == NULL) cout << "null" << endl;
