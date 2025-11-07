@@ -619,13 +619,13 @@ Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) con
 {
     cout << key << endl;
     Node<Key, Value>* curr = root_;
-    if (curr == NULL) cout << "null" << endl;
+    // if (curr == NULL) cout << "null" << endl;
     while (curr != NULL) {
-        if (curr->getKey() > key) {
-            cout << "right" << endl;
+        if (curr->getKey() < key) {
+            // cout << "right" << endl;
             curr = curr->getRight();
-        } else if (curr->getKey() < key) {
-            cout << "left" << endl;
+        } else if (curr->getKey() > key) {
+            // cout << "left" << endl;
             curr = curr->getLeft();
         } else {
             return curr;
