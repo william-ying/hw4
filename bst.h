@@ -444,16 +444,26 @@ Value const & BinarySearchTree<Key, Value>::operator[](const Key& key) const
 template<class Key, class Value>
 void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &keyValuePair)
 {
-    Node<Key, Value> *curr = internalFind(keyValuePair.first);
-    if(curr != NULL) curr->setValue(keyValuePair.second);
-    else {
-        Node<Key, Value> * temp = root_;
-        Node<Key, Value> * add = new Node(keyValuePair.first, keyValuePair.second, NULL)
-        if (temp == NULL) root_ = add;
-        while (temp->getLeft() != NULL) {
-            temp = temp->getLeft();
+    Node<Key, Value> *curr = root_;
+    while (curr != NULL) {
+        if (curr->getKey() > keyValuePair.first) {
+            if (curr->getRight() != NULL) {
+                curr = curr->getRight();
+            } else {
+                curr->setRight(new Node(keyValuePair.first, keyValuePair.second, curr);
+                break;
+            }
+        } else if (curr->getKey() < keyValuePair.first) {
+            if (curr->getLeft() != NULL) {
+                curr = curr->getLeft();
+            } else {
+                curr->setLeft(new Node(keyValuePair.first, keyValuePair.second, curr);
+                break;
+            }
+        } else {
+            curr->setValue(keyValuePair.second);
+            break;
         }
-        temp->setLeft(add);
     }
 }
 
