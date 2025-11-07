@@ -138,7 +138,7 @@ protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
     // Add helper functions here
     AVLNode<Key, Value>* root_;
-    AVLNode<Key, Value> *getSmallestNode() const override;
+    AVLNode<Key, Value> *getSmallestNode() const;
 
 };
 
@@ -150,7 +150,7 @@ AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree(
 
 template<typename Key, typename Value>
 AVLNode<Key, Value>*
-AVLTree<Key, Value>::getSmallestNode() const override
+AVLTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = this->root_;
     // if (temp == NULL) cout << "null" << endl;
