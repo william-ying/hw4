@@ -137,8 +137,8 @@ public:
 protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
     // Add helper functions here
-    AVLNode<Key, Value>* root_ override;
-
+    AVLNode<Key, Value>* root_;
+    AVLNode<Key, Value> *getSmallestNode() const;
 
 };
 
@@ -147,6 +147,21 @@ AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree(
 {
     root_ = NULL;
 }
+
+template<typename Key, typename Value>
+AVLNode<Key, Value>*
+AVLTree<Key, Value>::getSmallestNode() const
+{
+    Node<Key, Value>* temp = this->root_;
+    // if (temp == NULL) cout << "null" << endl;
+    // cout << "small find" << endl;
+    while (temp->getLeft() != NULL) {
+        temp = temp->getLeft();
+    }
+    // cout << temp->getKey() << endl;
+    return temp;
+}
+
 
 /*
  * Recall: If key is already in the tree, you should 
