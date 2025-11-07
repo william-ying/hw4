@@ -477,12 +477,12 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
     bool left = false;
     while (curr != NULL) {
         if (curr->getKey() < keyValuePair.first) {
-            cout << "right " << curr->getKey() << keyValuePair.first << endl;
+            // cout << "right " << curr->getKey() << keyValuePair.first << endl;
             back = curr;
             curr = curr -> getRight();
             left = false;
         } else if (curr->getKey() > keyValuePair.first) {
-            cout << "left " << curr->getKey() << keyValuePair.first << endl;
+            // cout << "left " << curr->getKey() << keyValuePair.first << endl;
             back = curr;
             curr = curr -> getLeft();
             left = true;
