@@ -312,8 +312,8 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this.current_->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs.current_->getSmallestNode();
+    Node<Key, Value>* temp1 = this->current_->getSmallestNode();
+    Node<Key, Value>* temp2 = rhs->current_->getSmallestNode();
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() == temp2->getValue()) {
@@ -321,8 +321,8 @@ BinarySearchTree<Key, Value>::iterator::operator==(
             if (temp2 -> getLeft() == NULL) return false;
             if (temp1->getRight() != NULL) {
                 if (temp2 -> getRight() == NULL) return false;
-                rlog.push(temp1.getRight());
-                rhslog.push(temp2.getRight());
+                rlog.push(temp1->getRight());
+                rhslog.push(temp2->getRight());
             }
             temp1 = temp1->getLeft();
             temp2 = temp2->getLeft();
@@ -351,8 +351,8 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this.current_->getSmallestNode();
-    Node<Key, Value>* temp2 = rhs.current_->getSmallestNode();
+    Node<Key, Value>* temp1 = this->current_->getSmallestNode();
+    Node<Key, Value>* temp2 = rhs->current_->getSmallestNode();
     stack<Node<Key, Value>*> rlog;
     stack<Node<Key, Value>*> rhslog;
     while (temp1->getValue() != temp2->getValue()) {
@@ -360,8 +360,8 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
             if (temp2 -> getLeft() == NULL) return false;
             if (temp1->getRight() != NULL) {
                 if (temp2 -> getRight() == NULL) return false;
-                rlog.push(temp1.getRight());
-                rhslog.push(temp2.getRight());
+                rlog.push(temp1->getRight());
+                rhslog.push(temp2->getRight());
             }
             temp1 = temp1->getLeft();
             temp2 = temp2->getLeft();
@@ -516,14 +516,14 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
             if (curr->getRight() != NULL) {
                 curr = curr->getRight();
             } else {
-                curr->setRight(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr);
+                curr->setRight(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr));
                 break;
             }
         } else if (curr->getKey() < keyValuePair.first) {
             if (curr->getLeft() != NULL) {
                 curr = curr->getLeft();
             } else {
-                curr->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr);
+                curr->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, curr));
                 break;
             }
         } else {
@@ -543,7 +543,7 @@ template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::remove(const Key& key)
 {
     Node<Key, Value> *curr = root_;
-    if (curr->getKey == key) {
+    if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
             delete curr;
         }
