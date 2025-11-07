@@ -137,7 +137,7 @@ public:
 protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
     // Add helper functions here
-    override AVLNode<Key, Value>* root_;
+    AVLNode<Key, Value>* override root_;
 
 
 };
