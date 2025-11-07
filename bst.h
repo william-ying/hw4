@@ -471,7 +471,7 @@ Value const & BinarySearchTree<Key, Value>::operator[](const Key& key) const
 template<class Key, class Value>
 void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &keyValuePair)
 {
-    cout << "insert " << keyValuePair.first << keyValuePair.second << endl;
+    // cout << "insert " << keyValuePair.first << keyValuePair.second << endl;
     Node<Key, Value> *curr = root_;
     Node<Key, Value> *back = NULL;
     bool left = false;
@@ -601,8 +601,8 @@ Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = root_;
-    // if (temp == NULL) cout << "null" << endl;
-    // cout << "small find" << endl;
+    if (temp == NULL) cout << "null" << endl;
+    cout << "small find" << endl;
     while (temp->getLeft() != NULL) {
         temp = temp->getLeft();
     }
