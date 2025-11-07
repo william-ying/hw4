@@ -353,7 +353,7 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         }
         prev = current_;
         current_ = current_->getParent();
-        if (current_->getLeft() != NULL && current_->getLeft() == temp) {
+        if (current_->getLeft() != NULL && current_->getLeft() == prev) {
             cout << current_->getKey() << " l " << current_->getValue() << endl;
             return *this;
         }
