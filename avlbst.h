@@ -287,9 +287,33 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 cout << "debug 1" << endl;
                 nodeSwap(curr->getLeft(), curr->getRight());
                 cout << "debug 2" << endl;
-                nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
+                if (curr->getLeft()->getLeft() == NULL) {
+                    if (curr->getRight()->getLeft() != NULL) {
+                        curr->getLeft()->getLeft() = curr->getRight()->getLeft();
+                        curr->getRight()->getLeft() = NULL;
+                    }
+                } else {
+                    if (curr->getRight()->getLeft() == NULL) {
+                        curr->getRight()->getLeft() = curr->getLeft()->getLeft();
+                        curr->getLeft()->getLeft() = NULL;
+                    } else {
+                        nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
+                    }
+                }
                 cout << "debug 3" << endl;
-                nodeSwap(curr->getLeft()->getRight(), currt->getRight()->getRight());
+                if (curr->getLeft()->getRight() == NULL) {
+                    if (curr->getRight()->getRight() != NULL) {
+                        curr->getLeft()->getRight() = curr->getRight()->getRight();
+                        curr->getRight()->getRight() = NULL;
+                    }
+                } else {
+                    if (curr->getRight()->getRight() == NULL) {
+                        curr->getRight()->getRight() = curr->getLeft()->getRight();
+                        curr->getLeft()->getRight() = NULL;
+                    } else {
+                        nodeSwap(curr->getLeft()->getRight(), currt->getRight()->getRight());
+                    }
+                }
                 cout << "debug 4" << endl;
             }
         }
