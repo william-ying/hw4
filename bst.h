@@ -584,6 +584,7 @@ void BinarySearchTree<Key, Value>::clear()
         
         temp = temp1;
     }
+    root_ = NULL;
 }
 
 
