@@ -586,16 +586,8 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = root_;
     cout << "small find" << endl;
-    while (temp != NULL) {
-        while (temp->getLeft() != NULL) {
-            temp = temp->getLeft();
-        }
-        while (temp->getRight() != NULL) {
-            temp = temp->getRight();
-            while (temp->getLeft() != NULL) {
-                temp = temp->getLeft();
-            }
-        }
+    while (temp->getLeft() != NULL) {
+        temp = temp->getLeft();
     }
     return temp;
 }
