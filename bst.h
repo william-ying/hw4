@@ -401,13 +401,11 @@ BinarySearchTree<Key, Value>::iterator::operator++()
         Node<Key, Value>* temp = current_;
         current_ = current_->getParent();
         if (current_->getLeft() == temp) {
-            BinarySearchTree<Key, Value>::iterator begin(current_);
-            return begin;
+            return *this;
         }
     }
     current_ = current_->getRight();
-    BinarySearchTree<Key, Value>::iterator begin(current_);
-    return begin;
+    return *this;
 }
 
 
