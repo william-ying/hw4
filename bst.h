@@ -325,41 +325,21 @@ BinarySearchTree<Key, Value>::iterator::operator==(
         }
     }
     
-    Node<Key, Value>* temp2 = rhs->current_;
-    while (temp2 != NULL) {
-        while (temp2->getLeft() != NULL) {
-            temp2 = temp2->getLeft();
-        }
-        while (temp2->getRight() != NULL) {
-            temp2 = temp2->getRight();
-            while (temp2->getLeft() != NULL) {
-                temp2 = temp2->getLeft();
-            }
-        }
-    }
+
     stack<Node<Key, Value>*> rlog;
-    stack<Node<Key, Value>*> rhslog;
-    while (temp1->getValue() == temp2->getValue()) {
+    while (temp1->getValue() == rhs.second) {
         if (temp1->getLeft() != NULL) {
-            if (temp2 -> getLeft() == NULL) return false;
             if (temp1->getRight() != NULL) {
-                if (temp2 -> getRight() == NULL) return false;
                 rlog.push(temp1->getRight());
-                rhslog.push(temp2->getRight());
             }
             temp1 = temp1->getLeft();
-            temp2 = temp2->getLeft();
         } else if (temp1->getRight() != NULL) {
-            if (temp2->getRight() == NULL) return false;
             temp1 = temp1->getRight();
-            temp2 = temp2->getRight();
         } else if (rlog.empty()){
             return true;
         } else {
             temp1 = rlog.top();
             rlog.pop();
-            temp2 = rhslog.top();
-            rhslog.pop();
         }
     }
     return false;
@@ -387,41 +367,20 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
         }
     }
     
-    Node<Key, Value>* temp2 = rhs->current_;
-    while (temp2 != NULL) {
-        while (temp2->getLeft() != NULL) {
-            temp2 = temp2->getLeft();
-        }
-        while (temp2->getRight() != NULL) {
-            temp2 = temp2->getRight();
-            while (temp2->getLeft() != NULL) {
-                temp2 = temp2->getLeft();
-            }
-        }
-    }
     stack<Node<Key, Value>*> rlog;
-    stack<Node<Key, Value>*> rhslog;
-    while (temp1->getValue() != temp2->getValue()) {
+    while (temp1->getValue() != rhs.second) {
         if (temp1->getLeft() != NULL) {
-            if (temp2 -> getLeft() == NULL) return false;
             if (temp1->getRight() != NULL) {
-                if (temp2 -> getRight() == NULL) return false;
                 rlog.push(temp1->getRight());
-                rhslog.push(temp2->getRight());
             }
             temp1 = temp1->getLeft();
-            temp2 = temp2->getLeft();
         } else if (temp1->getRight() != NULL) {
-            if (temp2->getRight() == NULL) return false;
             temp1 = temp1->getRight();
-            temp2 = temp2->getRight();
         } else if (rlog.empty()){
             return true;
         } else {
             temp1 = rlog.top();
             rlog.pop();
-            temp2 = rhslog.top();
-            rhslog.pop();
         }
     }
     return false;
