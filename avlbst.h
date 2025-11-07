@@ -157,11 +157,9 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 {
     AVLNode<Key, Value> *curr;
     curr = dynamic_cast<AVLNode<Key, Value>*>(this->root_);
-    bool left = false;
     while (curr != NULL) {
         if (curr->getKey() < new_item.first) {
             // cout << "right " << curr->getKey() << new_item.first << endl;
-            left = false;
             if (curr -> getRight() == NULL) {
                 curr -> setRight(new AVLNode<Key, Value>(new_item.first, new_item.second, curr));
                 curr = curr->getRight();
@@ -172,7 +170,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             
         } else if (curr->getKey() > new_item.first) {
             // cout << "left " << curr->getKey() << new_item.first << endl;
-            left = true;
             if (curr -> getLeft() == NULL) {
                 curr -> setLeft(new AVLNode<Key, Value>(new_item.first, new_item.second, curr));
                 curr = curr->getLeft();
@@ -229,6 +226,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 nodeSwap(curr, curr->getLeft());
                 nodeSwap(curr, curr->getLeft());
                 curr = tempcurr;
+                cout << "curr " << curr->getKey() << endl;
                 currt = curr->getLeft();
                 currt->getLeft()->setParent(curr);
                 curr->setRight(currt->getLeft());
