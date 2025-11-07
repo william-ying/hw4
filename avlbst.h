@@ -155,7 +155,8 @@ AVLTree<Key, Value>::AVLTree() : BinarySearchTree<Key, Value>::BinarySearchTree(
 template<class Key, class Value>
 void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 {
-    AVLNode<Key, Value> *curr = static_cast<AVLNode<Key, Value>>(this->root_);
+    AVLNode<Key, Value> *curr;
+    curr = this->root_;
     AVLNode<Key, Value> *back = NULL;
     bool left = false;
     while (curr != NULL) {
@@ -254,7 +255,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 template<class Key, class Value>
 void AVLTree<Key, Value>:: remove(const Key& key)
 {
-    AVLNode<Key, Value> *curr = this->static_cast<AVLNode<Key, Value>>(this->root_);
+    AVLNode<Key, Value> *curr;
+    curr = this->root_;
     AVLNode<Key, Value> *par = NULL;
     if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
