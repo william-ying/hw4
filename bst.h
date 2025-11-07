@@ -327,7 +327,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    cout << "!=" << endl;
+    // cout << "!=" << endl;
     if (current_ == NULL) return (rhs.current_ != NULL) ;
     else if (rhs.current_ == NULL) return true;
     return !(this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
@@ -343,6 +343,7 @@ BinarySearchTree<Key, Value>::iterator::operator++()
 {
     cout << "plussing" << endl;
     while (current_->getRight() == NULL) {
+        cout << "right" << endl;
         Node<Key, Value>* temp = current_;
         if (current_->getParent() == NULL) {
             BinarySearchTree<Key, Value>::iterator end(NULL);
