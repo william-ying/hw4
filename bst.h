@@ -342,7 +342,6 @@ typename BinarySearchTree<Key, Value>::iterator&
 BinarySearchTree<Key, Value>::iterator::operator++()
 {
     cout << "plussing" << endl;
-    if (current_->getLeft() != NULL) cout << "no left" << current_->getKey() << endl;
     while (current_->getRight() == NULL) {
         // cout << "right" << endl;
         Node<Key, Value>* temp = current_;
@@ -474,21 +473,26 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
     cout << "insert " << keyValuePair.first << keyValuePair.second << endl;
     Node<Key, Value> *curr = root_;
     Node<Key, Value> *back = NULL;
+    bool left = false;
     while (curr != NULL) {
         if (curr->getKey() < keyValuePair.first) {
             // cout << "right " << curr->getKey() << keyValuePair.first << endl;
             back = curr;
             curr = curr -> getRight();
+            left = false;
         } else if (curr->getKey() > keyValuePair.first) {
             // cout << "left " << curr->getKey() << keyValuePair.first << endl;
             back = curr;
             curr = curr -> getLeft();
+            left = true;
         } else {
             curr->setValue(keyValuePair.second);
-            break;
+            return;
         }
     }
-    curr = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back);
+    if (left) back->setLeft(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back));
+    else back->setRight(new Node<Key, Value>(keyValuePair.first, keyValuePair.second, back))
+    
     if (root_ == NULL) root_ = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
     else cout << curr->getKey() << " " << curr->getValue() << endl << endl;
 
