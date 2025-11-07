@@ -578,11 +578,12 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
         }
         nodeSwap(prev, curr);
         while (prev->getParent() != NULL) {
-            if (prev->getParent()->getLeft() == prev) {
-                if (prev->getKey() > prev->getParent()->getKey()) nodeSwap(prev, prev->getParent);
+            Node<Key, Value>* temp = prev->getParent();
+            if (temp->getLeft() == prev) {
+                if (prev->getKey() > temp->getKey()) nodeSwap(prev, temp);
                 else break;
             } else {
-                if (prev->getKey() < prev->getParent()->getKey()) nodeSwap(prev, prev->getParent);
+                if (prev->getKey() < temp->getKey()) nodeSwap(prev, temp);
                 else break;
             }
         }
