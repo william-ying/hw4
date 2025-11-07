@@ -174,9 +174,9 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             break;
         }
     }
-    if (static_cast<AVLNode<Key, Value>>(this->root_) == NULL) {
-        static_cast<AVLNode<Key, Value>>(this->root_) = new AVLNode<Key, Value>(new_item.first, new_item.second, NULL);
-        static_cast<AVLNode<Key, Value>>(this->root_)->setBalance(0);
+    if (this->root_ == NULL) {
+        this->root_ = new AVLNode<Key, Value>(new_item.first, new_item.second, NULL);
+        this->root_->setBalance(0);
         return;
     }
     if (back == NULL) {}
