@@ -312,38 +312,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->current_;
-    while (temp1 != NULL) {
-        while (temp1->getLeft() != NULL) {
-            temp1 = temp1->getLeft();
-        }
-        while (temp1->getRight() != NULL) {
-            temp1 = temp1->getRight();
-            while (temp1->getLeft() != NULL) {
-                temp1 = temp1->getLeft();
-            }
-        }
-    }
-    
-
-    stack<Node<Key, Value>*> rlog;
-    if (temp1 == NULL) return false;
-    while (temp1->getValue() == rhs->second) {
-        if (temp1->getLeft() != NULL) {
-            if (temp1->getRight() != NULL) {
-                rlog.push(temp1->getRight());
-            }
-            temp1 = temp1->getLeft();
-        } else if (temp1->getRight() != NULL) {
-            temp1 = temp1->getRight();
-        } else if (rlog.empty()){
-            return true;
-        } else {
-            temp1 = rlog.top();
-            rlog.pop();
-        }
-    }
-    return false;
+    return (this->getKey() == rhs.getKey() && this->getValue() == rhs.getValue());
 }
 
 /**
@@ -355,38 +324,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator!=(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    Node<Key, Value>* temp1 = this->current_;
-    while (temp1 != NULL) {
-        while (temp1->getLeft() != NULL) {
-            temp1 = temp1->getLeft();
-        }
-        while (temp1->getRight() != NULL) {
-            temp1 = temp1->getRight();
-            while (temp1->getLeft() != NULL) {
-                temp1 = temp1->getLeft();
-            }
-        }
-    }
-    
-    stack<Node<Key, Value>*> rlog;
-    if (temp1 == NULL) return false;
-    while (temp1->getValue() != rhs->second) {
-        if (temp1->getLeft() != NULL) {
-            if (temp1->getRight() != NULL) {
-                rlog.push(temp1->getRight());
-            }
-            temp1 = temp1->getLeft();
-        } else if (temp1->getRight() != NULL) {
-            temp1 = temp1->getRight();
-        } else if (rlog.empty()){
-            return true;
-        } else {
-            temp1 = rlog.top();
-            rlog.pop();
-        }
-    }
-    return false;
-
+    return !(this->getKey() == rhs.getKey() && this->getValue() == rhs.getValue());
 }
 
 
