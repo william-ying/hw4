@@ -202,7 +202,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         
         if (curr->getRight() == NULL) right = 0;
         else right = curr->getRight()->getBalance();
-        
+        cout << curr->getKey() << " " << left << " " << right << endl;
         if (left > right + 1) {
             currt = curr -> getLeft();
             if (currt->getLeft() == NULL) left1 = 0;
