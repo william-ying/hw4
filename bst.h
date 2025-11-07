@@ -312,7 +312,7 @@ bool
 BinarySearchTree<Key, Value>::iterator::operator==(
     const BinarySearchTree<Key, Value>::iterator& rhs) const
 {
-    cout << "==" << endl;
+    // cout << "==" << endl;
     if (current_ == NULL) return (rhs.current_ == NULL);
     else if (rhs.current_ == NULL) return false;
     return (this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
@@ -471,7 +471,7 @@ Value const & BinarySearchTree<Key, Value>::operator[](const Key& key) const
 template<class Key, class Value>
 void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &keyValuePair)
 {
-    cout << "insert " << keyValuePair.first << keyValuePair.second << endl;
+    // cout << "insert " << keyValuePair.first << keyValuePair.second << endl;
     Node<Key, Value> *curr = root_;
     while (curr != NULL) {
         if (curr->getKey() < keyValuePair.first) {
@@ -508,6 +508,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 {
     cout << "rem " << key << endl;
     Node<Key, Value> *curr = root_;
+    if (root_ == NULL) return;
     if (curr->getKey() == key) {
         if (curr->getLeft() == NULL && curr->getRight() == NULL) {
             delete curr;
@@ -562,7 +563,7 @@ BinarySearchTree<Key, Value>::predecessor(Node<Key, Value>* current)
 template<typename Key, typename Value>
 void BinarySearchTree<Key, Value>::clear()
 {
-    cout << "clear" << endl;
+    // cout << "clear" << endl;
     Node<Key, Value>* temp = root_;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
@@ -613,7 +614,7 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
-    cout << "find " << key << endl;
+    // cout << "find " << key << endl;
     Node<Key, Value>* curr = root_;
     // if (curr == NULL) cout << "null" << endl;
     while (curr != NULL) {
