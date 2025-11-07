@@ -541,14 +541,20 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 }
             } else {
                 if (left) {
-                    if (prev != NULL) prev->setLeft(curr->getRight());
+                    if (prev != NULL) {
+                        prev->setLeft(curr->getRight());
+                        curr->getRight()->setParent(prev);
+                    }
                     else {
                         root_ = curr->getRight();
                         root_->setParent(NULL);
                     }
                     delete curr;
                 } else {
-                    if (prev != NULL) prev->setRight(curr->getRight());
+                    if (prev != NULL) {
+                        prev->setRight(curr->getRight());
+                        curr->getRight()->setParent(prev);
+                    }
                     else {
                         root_ = curr->getRight();
                         root_->setParent(NULL);
@@ -560,14 +566,19 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
             if (curr->getRight() == NULL) {
                 cout << "left" << endl;
                 if (left) {
-                    if (prev != NULL) prev->setLeft(curr->getLeft());
+                    if (prev != NULL) {
+                        prev->setLeft(curr->getLeft());
+                        curr->getLeft()->setParent(prev);
                     else {
                         root_ = curr->getLeft();
                         root_->setParent(NULL);
                     }
                     delete curr;
                 } else {
-                    if (prev != NULL) prev->setRight(curr->getLeft());
+                    if (prev != NULL) {
+                        prev->setRight(curr->getLeft());
+                        curr->getLeft()->setParent(prev);
+                    }
                     else {
                         root_ = curr->getLeft();
                         root_->setParent(NULL);
@@ -584,6 +595,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                     delete curr;
                 } else {
                     curr->getParent()->setRight(curr->getLeft());
+                    curr->getLeft()->setParent(getParent());
                     delete curr;
                 }
             }
