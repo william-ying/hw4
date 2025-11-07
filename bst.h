@@ -474,8 +474,8 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
             break;
         }
     }
-    if (curr == NULL) curr = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
-    cout << root_->getKey() << " " << root_->getValue() << endl << endl;
+    if (root_ == NULL) root_ = new Node<Key, Value>(keyValuePair.first, keyValuePair.second, NULL);
+    cout << curr->getKey() << " " << curr->getValue() << endl << endl;
 
 }
 
