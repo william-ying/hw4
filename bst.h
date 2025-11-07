@@ -509,11 +509,6 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
     cout << "rem " << key << endl;
     Node<Key, Value> *curr = root_;
     if (root_ == NULL) return;
-    if (curr->getKey() == key) {
-        if (curr->getLeft() == NULL && curr->getRight() == NULL) {
-            delete curr;
-        }
-    }
     bool left = false;
     while (curr != NULL) {
         if (curr->getKey() > key) {
