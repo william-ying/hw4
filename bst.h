@@ -532,9 +532,11 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 if (left) {
                     if (prev != NULL) prev->setLeft(NULL);
                     delete curr;
+                    if (prev == NULL) root_ = NULL;
                 } else {
                     if (prev != NULL) prev->setRight(NULL);
                     delete curr;
+                    if (prev == NULL) root_ = NULL;
                 }
             } else {
                 if (left) {
