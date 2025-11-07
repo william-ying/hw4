@@ -510,6 +510,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 curr->getParent()->setRight(NULL);
             }
             delete curr;
+        }
     }
 }
 
@@ -567,7 +568,19 @@ template<typename Key, typename Value>
 Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
-    // TODO
+    Node* temp = root_;
+    while (temp != NULL) {
+        while (temp->getLeft() != NULL) {
+            temp = temp->getLeft();
+        }
+        while (temp->getRight() != NULL) {
+            temp = temp->getRight();
+            while (temp->getLeft() != NULL) {
+                temp = temp->getLeft();
+            }
+        }
+    }
+    return temp;
 }
 
 /**
@@ -578,7 +591,17 @@ BinarySearchTree<Key, Value>::getSmallestNode() const
 template<typename Key, typename Value>
 Node<Key, Value>* BinarySearchTree<Key, Value>::internalFind(const Key& key) const
 {
-    // TODO
+    Node* curr = root_;
+    while (curr != NULL) {
+        if (curr->getKey() > key) {
+            curr = curr->getRight();
+        } else if (curr->getKey() < key) {
+            curr = curr->getLeft();
+        } else {
+            return curr;
+        }
+    }
+    return NULL;
 }
 
 /**
