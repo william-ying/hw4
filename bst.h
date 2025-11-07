@@ -355,7 +355,7 @@ Begin implementations for the BinarySearchTree class.
 template<class Key, class Value>
 BinarySearchTree<Key, Value>::BinarySearchTree() 
 {
-    // TODO
+    root_ = NULL;
 }
 
 template<typename Key, typename Value>
@@ -444,7 +444,17 @@ Value const & BinarySearchTree<Key, Value>::operator[](const Key& key) const
 template<class Key, class Value>
 void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &keyValuePair)
 {
-    // TODO
+    Node<Key, Value> *curr = internalFind(keyValuePair.first);
+    if(curr != NULL) curr->setValue(keyValuePair.second);
+    else {
+        Node<Key, Value> * temp = root_;
+        Node<Key, Value> * add = new Node(keyValuePair.first, keyValuePair.second, NULL)
+        if (temp == NULL) root_ = add;
+        while (temp->getLeft() != NULL) {
+            temp = temp->getLeft();
+        }
+        temp->setLeft(add);
+    }
 }
 
 
