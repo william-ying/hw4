@@ -162,14 +162,26 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     while (curr != NULL) {
         if (curr->getKey() < new_item.first) {
             // cout << "right " << curr->getKey() << keyValuePair.first << endl;
-            back = curr;
-            curr = curr -> getRight();
             left = false;
+            back = curr;
+            if (curr -> getRight() == NULL) {
+                curr -> setRight(new AVLNode<Key, Value>(keyValuePair.first, keyValuePair.second, curr));
+                curr = curr->getRight();
+                break;
+            }
+            curr = curr -> getRight();
+            
+            
         } else if (curr->getKey() > new_item.first) {
             // cout << "left " << curr->getKey() << keyValuePair.first << endl;
-            back = curr;
-            curr = curr -> getLeft();
             left = true;
+            back = curr;
+            if (curr -> getLeft() == NULL) {
+                curr -> setLeft(new AVLNode<Key, Value>(keyValuePair.first, keyValuePair.second, curr));
+                curr = curr->getLeft();
+                break;
+            }
+            curr = curr -> getLeft();
         } else {
             curr->setValue(new_item.second);
             break;
@@ -178,14 +190,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     if (this->root_ == NULL) {
         this->root_ = new AVLNode<Key, Value>(new_item.first, new_item.second, NULL);
         return;
-    }
-    if (back == NULL) {}
-    else if (left) {
-        back->setLeft(new AVLNode<Key, Value>(new_item.first, new_item.second, back));
-        curr = back->getLeft();
-    } else {
-        back->setRight(new AVLNode<Key, Value>(new_item.first, new_item.second, back));
-        curr = back->getRight();
     }
 
     curr->setBalance(0);
