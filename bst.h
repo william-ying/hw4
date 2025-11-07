@@ -328,7 +328,7 @@ BinarySearchTree<Key, Value>::iterator::operator!=(
 {
     cout << "!=" << endl;
     if (current_ == NULL) return false;
-    // cout << this->current_->getKey() << endl;
+    cout << this->current_->getKey() << endl;
     return !(this->current_->getKey() == rhs->first && this->current_->getValue() == rhs->second);
 }
 
@@ -585,6 +585,7 @@ Node<Key, Value>*
 BinarySearchTree<Key, Value>::getSmallestNode() const
 {
     Node<Key, Value>* temp = root_;
+    cout << "small find" << endl;
     while (temp != NULL) {
         while (temp->getLeft() != NULL) {
             temp = temp->getLeft();
