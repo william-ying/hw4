@@ -215,8 +215,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 if (currt->getLeft() != NULL) {
                     nodeSwap(currt2, currt->getLeft());
                     currt2 = currt->getLeft();
-                    nodeSwap(currt2->getLeft(), currt->getRight());
-                    nodeSwap(currt2->getRight(), currt->getRight());
+                    if (currt2->getLeft() != NULL) nodeSwap(currt2->getLeft(), currt->getRight());
+                    if (currt2->getRight() != NULL) nodeSwap(currt2->getRight(), currt->getRight());
                 } else {
                     currt->setLeft(currt2);
                     currt->setRight(NULL);
@@ -237,8 +237,34 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             } else {
                 nodeSwap(currt->getLeft(), curr->getRight());
                 nodeSwap(curr->getLeft(), curr->getRight());
-                nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
-                nodeSwap(curr->getLeft()->getRight(), currt->getRight()->getRight());
+                if (curr->getLeft()->getLeft() == NULL) {
+                    if (curr->getRight()->getLeft() != NULL) {
+                        curr->getLeft()->setLeft(curr->getRight()->getLeft());
+                        curr->getRight()->setLeft(NULL);
+                    }
+                } else {
+                    if (curr->getRight()->getLeft() == NULL) {
+                        curr->getRight()->setLeft(curr->getLeft()->getLeft());
+                        curr->getLeft()->setLeft(NULL);
+                    } else {
+                        nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
+                    }
+                }
+                if (curr->getLeft()->getRight() == NULL) {
+                    if (curr->getRight()->getRight() != NULL) {
+                        curr->getRight()->getRight()->setParent(curr->getLeft()->getRight());
+                        curr->getLeft()->setRight(curr->getRight()->getRight());
+                        curr->getRight()->setRight(NULL);
+                    }
+                } else {
+                    if (curr->getRight()->getRight() == NULL) {
+                        curr->getLeft()->getRight()->setParent(curr->getRight()->getRight());
+                        curr->getRight()->setRight(curr->getLeft()->getRight());
+                        curr->getLeft()->setRight(NULL);
+                    } else {
+                        nodeSwap(curr->getLeft()->getRight(), curr->getRight()->getRight());
+                    }
+                }
             }
         } else if (left + 1 < right) {
             currt = curr -> getRight();
@@ -263,8 +289,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 if (currt->getRight() != NULL) {
                     nodeSwap(currt2, currt->getRight());
                     currt2 = currt->getRight();
-                    nodeSwap(currt2->getRight(), currt->getLeft());
-                    nodeSwap(currt2->getLeft(), currt->getLeft());
+                    if (currt2->getRight() != NULL) nodeSwap(currt2->getRight(), currt->getLeft());
+                    if (currt2->getLeft() != NULL) nodeSwap(currt2->getLeft(), currt->getLeft());
                 } else {
                     currt->setRight(currt2);
                     currt->setLeft(NULL);
@@ -284,9 +310,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 currt->setRight(NULL);
             } else {
                 nodeSwap(currt->getRight(), curr->getLeft());
-                cout << "debug 1" << endl;
                 nodeSwap(curr->getLeft(), curr->getRight());
-                cout << "debug 2" << endl;
                 if (curr->getLeft()->getLeft() == NULL) {
                     if (curr->getRight()->getLeft() != NULL) {
                         curr->getLeft()->setLeft(curr->getRight()->getLeft());
@@ -300,7 +324,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                         nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
                     }
                 }
-                cout << "debug 3" << endl;
                 if (curr->getLeft()->getRight() == NULL) {
                     if (curr->getRight()->getRight() != NULL) {
                         curr->getRight()->getRight()->setParent(curr->getLeft()->getRight());
@@ -316,7 +339,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                         nodeSwap(curr->getLeft()->getRight(), curr->getRight()->getRight());
                     }
                 }
-                cout << "debug 4" << endl;
             }
         }
 
