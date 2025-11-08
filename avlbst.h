@@ -357,7 +357,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                 if (left) { if (prev != NULL) prev->setLeft(NULL);
                 } else {if (prev != NULL) prev->setRight(NULL);}
                 delete curr;
-                if (prev == NULL) root_ = NULL;
+                if (prev == NULL) this->root_ = NULL;
                 curr = prev;
             } else {
                 if (left) {
@@ -365,8 +365,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         prev->setLeft(curr->getRight());
                         curr->getRight()->setParent(prev);
                     } else {
-                        root_ = curr->getRight();
-                        root_->setParent(NULL);
+                        this->root_ = curr->getRight();
+                        this->root_->setParent(NULL);
                     }
                     delete curr;
                     curr = prev;
@@ -376,8 +376,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         curr->getRight()->setParent(prev);
                     }
                     else {
-                        root_ = curr->getRight();
-                        root_->setParent(NULL);
+                        this->root_ = curr->getRight();
+                        this->root_->setParent(NULL);
                     }
                     delete curr;
                     curr = prev;
@@ -392,8 +392,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         curr->getLeft()->setParent(prev);
                     }
                     else {
-                        root_ = curr->getLeft();
-                        root_->setParent(NULL);
+                        this->root_ = curr->getLeft();
+                        this->root_->setParent(NULL);
                     }
                     delete curr;
                     curr = prev;
@@ -403,15 +403,15 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         curr->getLeft()->setParent(prev);
                     }
                     else {
-                        root_ = curr->getLeft();
-                        root_->setParent(NULL);
+                        this->root_ = curr->getLeft();
+                        this->root_->setParent(NULL);
                     }
                     delete curr;
                     curr = prev;
                 }
             } else {
                 // cout << "l" << endl;
-                Node<Key, Value> *max = curr->getLeft();
+                AVLNode<Key, Value> *max = curr->getLeft();
                 left = true;
                 while (max->getRight() != NULL) {
                     max = max->getRight();
