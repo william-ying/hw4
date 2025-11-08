@@ -221,11 +221,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 currt = currt->getParent();
                 AVLNode<Key, Value>* currt2 = currt -> getRight();
 
-                if (currt->getLeft() == NULL) {
-                    currt->setLeft(currt->getRight());
-                    currt->setRight(NULL);
-                    nodeSwap(currt, currt->getLeft());
-                } else {
+                if (currt->getLeft() != NULL) {
                     // cout << currt->getLeft()->getKey() << endl;
                     // cout << currt->getLeft()->getBalance() << endl;
                     if (currt2->getLeft() == NULL) {
@@ -245,10 +241,10 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                         temp->setParent(currt2);
                         currt2->setRight(temp);
                     }
-                    AVLNode<Key, Value>* temp = currt->getLeft();
-                    currt->setLeft(currt->getRight());
-                    currt->setRight(temp);
                 }
+                AVLNode<Key, Value>* temp = currt->getLeft();
+                currt->setLeft(currt->getRight());
+                currt->setRight(temp);
             }
             nodeSwap(curr, curr->getLeft());
             
@@ -293,15 +289,11 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 
             if (right1 < left1) {
                 // cout << "bend" << endl;
-                nodeSwap(currt, currt->getLeft());
+                nodeSwap(currt, currt->getRight());
                 currt = currt->getParent();
                 AVLNode<Key, Value>* currt2 = currt -> getLeft();
                     
-                if (currt->getRight() == NULL) {
-                    currt->setRight(currt->getLeft());
-                    currt->setLeft(NULL);
-                    nodeSwap(currt, currt->getRight());
-                } else {
+                if (currt->getRight() != NULL) {
                     if (currt2->getRight() == NULL) {
                         nodeSwap(currt2->getLeft(), currt->getRight());
                         currt2->setRight(currt2->getLeft());
