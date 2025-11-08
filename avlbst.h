@@ -251,7 +251,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             else right = curr->getRight()->getBalance();
     
             curr -> setBalance(max(left, right) + 1);
-
+            if (this->root_ == currt) root_ = curr;
             curr = currt;
             
         } else if (left + 1 < right) {
@@ -278,9 +278,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 temp = currt->getRight();
                 currt->setRight(currt->getLeft());
                 currt->setLeft(temp);
-
-
-                
             }
             
             currt = curr->getRight();
@@ -298,7 +295,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             else right = curr->getRight()->getBalance();
     
             curr -> setBalance(max(left, right) + 1);
-
+            if (this->root_ == currt) root_ = curr;
             curr = currt;
             
         }
