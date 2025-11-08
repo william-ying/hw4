@@ -339,7 +339,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         if (curr->getRight() == NULL) right = 0;
         else right = curr->getRight()->getBalance();
 
-        if (curr != root_) curr -> setBalance(max(left, right) + 1);
+        if (curr != this->root_) curr -> setBalance(max(left, right) + 1);
         else rootbal = max(left, right) + 1;
     }
 }
@@ -454,9 +454,9 @@ void AVLTree<Key, Value>::nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* 
 {
     BinarySearchTree<Key, Value>::nodeSwap(n1, n2);
     int8_t tempB;
-    if (n1 == root_) tempB = rootbal;
+    if (n1 == this->root_) tempB = rootbal;
     else tempB = n1->getBalance();
-    if (n2 == root_) n1->setBalance(rootbal);
+    if (n2 == this->root_) n1->setBalance(rootbal);
     else n1->setBalance(n2->getBalance());
     n2->setBalance(tempB);
 }
