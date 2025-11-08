@@ -137,7 +137,7 @@ public:
 protected:
     virtual void nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2);
     // Add helper functions here
-    
+    int rootbal;
 
 };
 
@@ -183,7 +183,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
     }
     if (this->root_ == NULL) {
         this->root_ = new AVLNode<Key, Value>(new_item.first, new_item.second, NULL);
-        curr->setBalance(1);
+        rootbal = 1;
         return;
     }
     curr->setBalance(1);
@@ -340,7 +340,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         if (curr->getRight() == NULL) right = 0;
         else right = curr->getRight()->getBalance();
 
-        curr -> setBalance(max(left, right) + 1);
+        if (curr != root_) curr -> setBalance(max(left, right) + 1);
+        else rootbal = setBalance(max(left, right) + 1)
     }
 }
 
