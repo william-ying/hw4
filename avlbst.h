@@ -187,7 +187,6 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         return;
     }
     curr->setBalance(1);
-    cout << curr->getKey() << " " << curr->getBalance() << endl;;
     while (curr ->getParent() != NULL) {
         AVLNode<Key, Value>* currt;
         curr = curr->getParent();
@@ -244,8 +243,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                     currt->setRight(temp);
                 }
             }
-
             nodeSwap(curr, curr->getLeft());
+            
             currt = curr;
             curr = curr->getParent();
             if (curr->getRight() == NULL) {
@@ -341,7 +340,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         else right = curr->getRight()->getBalance();
 
         if (curr != root_) curr -> setBalance(max(left, right) + 1);
-        else rootbal = setBalance(max(left, right) + 1)
+        else rootbal = max(left, right) + 1;
     }
 }
 
@@ -454,8 +453,11 @@ template<class Key, class Value>
 void AVLTree<Key, Value>::nodeSwap( AVLNode<Key,Value>* n1, AVLNode<Key,Value>* n2)
 {
     BinarySearchTree<Key, Value>::nodeSwap(n1, n2);
-    int8_t tempB = n1->getBalance();
-    n1->setBalance(n2->getBalance());
+    int8_t tempB;
+    if (n1 == root_) tempB = rootbal;
+    else tempB = n1->getBalance();
+    if (n2 == root_) n1->setBalance(rootbal);
+    else n1->setBalance(n2->getBalance());
     n2->setBalance(tempB);
 }
 
