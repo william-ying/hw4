@@ -312,10 +312,10 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                         currt2->setLeft(temp);
                         
                     }
-                    AVLNode<Key, Value>* temp = currt->getRight();
-                    currt->setRight(currt->getLeft());
-                    currt->setLeft(temp);
                 }
+                AVLNode<Key, Value>* temp = currt->getRight();
+                currt->setRight(currt->getLeft());
+                currt->setLeft(temp);
             }
 
             nodeSwap(curr, curr->getRight());
