@@ -350,9 +350,9 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             curr->setLeft(temp);
 
             if (currt->getLeft() == NULL) left = 0;
-            else left = curr->getLeft()->getBalance();
+            else left = currt->getLeft()->getBalance();
             if (currt->getRight() == NULL) right = 0;
-            else right = curr->getRight()->getBalance();
+            else right = currt->getRight()->getBalance();
     
             currt -> setBalance(max(left, right) + 1);
             
