@@ -225,11 +225,11 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                     // cout << currt->getLeft()->getKey() << endl;
                     // cout << currt->getLeft()->getBalance() << endl;
                     AVLNode<Key, Value>* temp = currt->getLeft();
-                    if (currt2->getLeft() != NULL) currt2->getLeft()->setParent(currt);
-                    currt->setLeft(currt2->getLeft());
-                    currt2->setLeft(currt2->getRight());
+                    if (currt2->getRight() != NULL) currt2->getRight()->setParent(currt);
+                    currt->setLeft(currt2->getRight());
+                    currt2->setRight(currt2->getLeft());
                     if (temp != NULL) temp->setParent(currt2);
-                    currt2->setRight(temp);
+                    currt2->setLeft(temp);
                 }
                 AVLNode<Key, Value>* temp = currt->getLeft();
                 currt->setLeft(currt->getRight());
@@ -284,11 +284,11 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                     
                 if (currt->getRight() != NULL) {
                     AVLNode<Key, Value>* temp = currt->getRight();
-                    if (currt2->getRight() != NULL) currt2->getRight()->setParent(currt);
-                    currt->setRight(currt2->getRight());
-                    currt2->setRight(currt2->getLeft());
+                    if (currt2->getLeft() != NULL) currt2->getLeft()->setParent(currt);
+                    currt->setRight(currt2->getLeft());
+                    currt2->setLeft(currt2->getRight());
                     if (temp != NULL) temp->setParent(currt2);
-                    currt2->setLeft(temp);
+                    currt2->setRight(temp);
                 }
                 AVLNode<Key, Value>* temp = currt->getRight();
                 currt->setRight(currt->getLeft());
