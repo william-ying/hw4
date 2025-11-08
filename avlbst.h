@@ -216,7 +216,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 AVLNode<Key, Value>* currt2 = currt -> getRight();
 
                 if (currt->getLeft() == NULL) {
-                    currt->setLeft(currt2->getRight());
+                    currt->setLeft(currt->getRight());
                     currt->setRight(NULL);
                 } else {
                     if (currt2->getLeft() == NULL) {
@@ -276,7 +276,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 AVLNode<Key, Value>* currt2 = currt -> getLeft();
                     
                 if (currt->getLeft() == NULL) {
-                    currt->setLeft(currt2->getRight());
+                    currt->setLeft(currt->getRight());
                     currt->setRight(NULL);
                 } else {
                     if (currt->getRight() == NULL) {
