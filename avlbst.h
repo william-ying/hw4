@@ -239,29 +239,35 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
                 nodeSwap(curr->getLeft(), curr->getRight());
                 if (curr->getLeft()->getLeft() == NULL) {
                     if (curr->getRight()->getLeft() != NULL) {
+                        cout << "case 1" << endl;
                         curr->getLeft()->setLeft(curr->getRight()->getLeft());
                         curr->getRight()->setLeft(NULL);
                     }
                 } else {
                     if (curr->getRight()->getLeft() == NULL) {
+                        cout << "case 2" << endl;
                         curr->getRight()->setLeft(curr->getLeft()->getLeft());
                         curr->getLeft()->setLeft(NULL);
                     } else {
+                        cout << "case 3" << endl;
                         nodeSwap(curr->getLeft()->getLeft(), curr->getRight()->getLeft());
                     }
                 }
                 if (curr->getLeft()->getRight() == NULL) {
                     if (curr->getRight()->getRight() != NULL) {
+                        cout << "case 4" << endl;
                         curr->getRight()->getRight()->setParent(curr->getLeft()->getRight());
                         curr->getLeft()->setRight(curr->getRight()->getRight());
                         curr->getRight()->setRight(NULL);
                     }
                 } else {
                     if (curr->getRight()->getRight() == NULL) {
+                        cout << "case 5" << endl;
                         curr->getLeft()->getRight()->setParent(curr->getRight()->getRight());
                         curr->getRight()->setRight(curr->getLeft()->getRight());
                         curr->getLeft()->setRight(NULL);
                     } else {
+                        cout << "case 6" << endl;
                         nodeSwap(curr->getLeft()->getRight(), curr->getRight()->getRight());
                     }
                 }
