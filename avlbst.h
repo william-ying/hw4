@@ -187,8 +187,8 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         return;
     }
     curr->setBalance(1);
-    cout << "insert " << curr->getKey() << " " << curr->getBalance() << endl;
-    if (curr->getParent() != NULL) cout << "parent " << curr->getParent()->getKey() << endl;
+    // cout << "insert " << curr->getKey() << " " << curr->getBalance() << endl;
+    // if (curr->getParent() != NULL) cout << "parent " << curr->getParent()->getKey() << endl;
     while (curr ->getParent() != NULL) {
         AVLNode<Key, Value>* currt;
         curr = curr->getParent();
@@ -200,15 +200,15 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         else right = curr->getRight()->getBalance();
 
         
-        cout << curr->getKey() << endl;
-        cout << "l " << left;
-        if (left != 0) cout << " " << curr->getLeft()->getKey();
-        cout << endl << "r " << right;
-        if (right != 0) cout << " " << curr->getRight()->getKey();
-        cout << endl;
+        // cout << curr->getKey() << endl;
+        // cout << "l " << left;
+        // if (left != 0) cout << " " << curr->getLeft()->getKey();
+        // cout << endl << "r " << right;
+        // if (right != 0) cout << " " << curr->getRight()->getKey();
+        // cout << endl;
         
         if (left > right + 1) {
-            cout << "spin right" << endl;
+            // cout << "spin right" << endl;
             currt = curr -> getLeft();
             if (currt->getLeft() == NULL) left1 = 0;
             else left1 = currt->getLeft()->getBalance();
@@ -217,7 +217,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
 
             
             if (right1 > left1) {
-                cout << "bend" << endl;
+                // cout << "bend" << endl;
                 nodeSwap(currt, currt->getRight());
                 currt = currt->getParent();
                 AVLNode<Key, Value>* currt2 = currt -> getRight();
@@ -249,7 +249,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             if (temp != NULL) temp->setParent(curr);
             curr->setLeft(temp);
 
-            cout << "comp " << currt->getLeft()->getKey() << " " << currt->getKey() << " " << currt->getRight()->getKey() << endl;
+            // cout << "comp " << currt->getLeft()->getKey() << " " << currt->getKey() << " " << currt->getRight()->getKey() << endl;
 
             if (curr->getLeft() == NULL) left = 0;
             else left = curr->getLeft()->getBalance();
@@ -261,7 +261,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             curr = currt;
             
         } else if (left + 1 < right) {
-            cout << "spin left" << endl;
+            // cout << "spin left" << endl;
             currt = curr -> getRight();
             if (currt->getLeft() == NULL) left1 = 0;
             else left1 = currt->getLeft()->getBalance();
@@ -269,7 +269,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             else right1 = currt->getRight()->getBalance();
 
             if (right1 < left1) {
-                cout << "bend" << endl;
+                // cout << "bend" << endl;
                 nodeSwap(currt, currt->getLeft());
                 currt = currt->getParent();
                 AVLNode<Key, Value>* currt2 = currt -> getLeft();
@@ -299,7 +299,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             if (temp != NULL) temp->setParent(curr);
             curr->setRight(temp);
             
-            cout << "comp " << currt->getLeft()->getKey() << " " << currt->getKey() << " " << currt->getRight()->getKey() << endl;
+            // cout << "comp " << currt->getLeft()->getKey() << " " << currt->getKey() << " " << currt->getRight()->getKey() << endl;
 
             if (curr->getLeft() == NULL) left = 0;
             else left = curr->getLeft()->getBalance();
