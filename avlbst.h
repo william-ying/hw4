@@ -199,9 +199,15 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
         else right = curr->getRight()->getBalance();
 
         
-        cout << curr->getKey() << " " << left << " " << right << endl;
+        cout << curr->getKey() << endl;
+        cout << "l " << left;
+        if (left != 0) cout << " " << curr->getLeft()->getKey();
+        cout << endl << "r " << right;
+        if (right != 0) cout << " " << curr->getRight()->getKey();
+        cout << endl;
         
         if (left > right + 1) {
+            cout << "spin right" << endl;
             currt = curr -> getLeft();
             if (currt->getLeft() == NULL) left1 = 0;
             else left1 = currt->getLeft()->getBalance();
@@ -277,6 +283,7 @@ void AVLTree<Key, Value>::insert (const std::pair<const Key, Value> &new_item)
             currt -> setBalance(max(left, right) + 1);
             
         } else if (left + 1 < right) {
+            cout << "spin left" << endl;
             currt = curr -> getRight();
             if (currt->getLeft() == NULL) left1 = 0;
             else left1 = currt->getLeft()->getBalance();
